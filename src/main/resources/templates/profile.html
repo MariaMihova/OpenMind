@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns: xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="shortcut icon" type="image/png" href="images/icon.png"/>
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"/>
+    <title>Open Mind</title>
+
+
+</head>
+<body >
+<header class="header container">
+    <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+
+
+    <div class="section__title" th:object="${pictureViewModel}">
+        <a th:unless="*{edit}" v-b-tooltip.hover title="add picture" th:href="@{/add-picture}">
+            <img  class="user-img" th:src="*{url}" th:alt="*{title}"/>
+        </a>
+        <a th:if="*{edit}" v-b-tooltip.hover title="Edit picture" th:href="@{/edit-picture}">
+            <img id="picture" class="user-img" th:src="*{url}" th:alt="*{title}"/>
+        </a>
+
+        <h2 class="highlight" id="username" sec:authentication="name" style="font-size: 4.5rem">Username</h2>
+
+    </div>
+    <div>
+        <ul class="operations__tab-container">
+            <li class="operations__tab" data-tab="1">
+                <a href="#articles" class="btn btn-success btn-lg" id="article-btn"> <b>&#x1F4D6; Articles</b></a>
+            </li>
+            <li class="operations__tab" data-tab="2">
+                <a href="#meetings" class="btn btn-warning btn-lg" id="meetings-btn"><b>&#x1F4C6; Meetings</b></a>
+            </li>
+            <li class="operations__tab" data-tab="3">
+                <a href="#clients" class="btn btn-success btn-lg" id="cases-btn"><b>&#128106; Clients</b></a>
+            </li>
+            <li class="operations__tab" data-tab="4">
+                <!--     todo   &#x2709; - message emoji            -->
+                <a href="#contacts" class="btn btn-warning btn-lg" id="contacts-btn"><b>&#x1F4DE; Contacts</b></a>
+            </li>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="operations__tab" data-tab="2">
+                    <a th:href="@{/admin}" class="btn btn-warning btn-lg" id="admin-btn"><b>&#127344; Admin</b></a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</header>
+<div class="section container" id="articles">
+    <div class="row">
+        <div class="operations__icon operations__icon--1">
+            <a th:href="@{/add-article}">
+                <img src="images/upload-icon.png" class="features__icon" alt="upload">
+            </a>
+        </div>
+        <h5 class="operations__header col-lg. m-4 col-sx. m-4">Your articles</h5>
+    </div>
+    <div class="operations__content operations__content--1 operations__content--active">
+
+        <!--        todo make it pageable-->
+        <p id="article" class="row" th:each="a : ${userArticles}">
+            <th:block class="container">
+                <strong>
+                    <a class="row" th:href="@{/article/{id} (id=${a.getId()})}" th:value="${a.getTitle()}"
+                       th:text="${a.getTitle()}"
+                       style="text-decoration:none; color:black"></a> </strong><br/>
+                <span class="row" th:value="${a.getSummery()}" th:text="${a.getSummery()}"></span><br/>
+                <strong>
+                    <span class="row" th:value="${a.getUsername()}" th:text="${a.getUsername()}"></span></strong>
+            </th:block>
+        </p>
+    </div>
+</div>
+</div>
+
+<div class="section container" id="meetings">
+
+    <div class="row">
+        <div class="operations__icon operations__icon--1">
+            <a th:href="@{/add-meeting}">
+                <img src="images/upload-icon.png" class="features__icon" alt="upload">
+            </a>
+        </div>
+        <h5 class="operations__header col-lg. m-4 col-sx. m-4">Your Meetings</h5>
+    </div>
+
+    <table class="table" style="font-size: 1.8rem;">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Topic</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Type</th>
+        </tr>
+        </thead>
+        <tbody id="meeting" th:each="m : ${meetings}">
+        <tr>
+            <th scope="row" th:value="${m.getId()}" th:text="${m.getId()}">id</th>
+            <td th:value="${m.getTopic()}" th:text="${m.getTopic()}">topic</td>
+            <!--            todo fix date display(the T)-->
+            <td th:value="${m.getStart()}" th:text="${m.getStart()}">start</td>
+            <td th:value="${m.getEnd()}" th:text="${m.getEnd()}">end</td>
+            <td th:value="${m.getType().name()}" th:text="${m.getType().name()}">type</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="clients">
+    <section class="section" id="section--3">
+        <div class="section__title section__title--testimonials">
+            <h2 class="section__description">Your clients</h2>
+        </div>
+
+        <div class="slider">
+<!--            for each w slide-->
+<!--            <div class="slide">-->
+<!--                <div class="testimonial">-->
+<!--                    <h5 class="testimonial__header" >-->
+<!--                        Initials</h5>-->
+<!--                    <blockquote class="testimonial__text">-->
+<!--                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+<!--                        Accusantium quas quisquam non? Quas voluptate nulla minima-->
+<!--                        deleniti optio ullam nesciunt, numquam corporis et asperiores-->
+<!--                        laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus-->
+<!--                        id alias reiciendis, perferendis facere pariatur dolore veniam-->
+<!--                        autem esse non voluptatem saepe provident nihil molestiae.-->
+<!--                    </blockquote>-->
+<!--                    <h6 class="testimonial__header" >Age</h6>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <button class="slider__btn slider__btn--left">&larr;</button>
+            <button class="slider__btn slider__btn--right">&rarr;</button>
+            <div class="dots"></div>
+        </div>
+    </section>
+</div>
+
+
+<div id="contacts" class="container">
+    <section class="section">
+
+        <div class="row">
+            <div class="operations__icon operations__icon--1">
+                <img src="images/contacts.png" class="features__icon" alt="upload">
+            </div>
+            <h5 class="operations__header col-lg. m-4 col-sx. m-4">Contacts</h5>
+        </div>
+
+        <div clas="container" th:object="${contactViewModel}">
+            <div class="testimonial">
+                    <h5 class="address col-lg. m-4 col-sx. m-4" th:value="*{address}" th:text="*{address}"></h5>
+                    <h6 class="address col-lg. m-4 col-sx. m-4"  th:value="*{phoneNumber}" th:text="*{phoneNumber}"></h6>
+                    <h6  class="address col-lg. m-4 col-sx. m-4" th:value="*{email}" th:text="*{email}"></h6>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script type="text/javascript" src="/js/profile.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/profile.js}"></script>
+<footer class="footer">
+    <div th:replace="/fragments/navbar :: footer">Footer</div>
+</footer>
+</body>
+
+
+</html>

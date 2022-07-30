@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
+<head >
+    <div th:replace="/fragments/special-fragments :: head">Head</div>
+</head>
+<body>
+<header class="header container">
+    <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+    <div class="row">
+        <div class="col-xs. m-6 header__title ">
+            <!-- <h1 onclick="alert('HTML alert')"> -->
+            <h1 class="title">
+                Something went
+                <!-- Green highlight effect -->
+                <span class="highlight">wrong!</span>
+                Please, go back to <br />
+                <a class="highlight" th:href="@{/home}"  style="text-decoration:none; color:black">home</a>
+            </h1>
+            <img src="/images/icon.png" class="header__img col-xs. m-6" alt="psych-img" />
+        </div>
+    </div>
+
+
+
+</header>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<footer class="footer">
+    <div th:replace="/fragments/special-fragments :: footer">Footer</div>
+</footer>
+</body>
+
+
+</html>

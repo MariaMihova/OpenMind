@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
+  <head>
+    <div th:replace="/fragments/navbar :: head">Head</div>
+  </head>
+  <body>
+    <header class="header container">
+      <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+<div class="row">
+      <div class="col-xs. m-6 header__title ">
+        <h1 class="title">
+          Becoming
+          <span class="highlight">is better</span>
+          than <br />
+          <span class="highlight">being.</span>
+          -Carol S. Dweck
+        </h1>
+        <h4 class="subtitle">
+          <div id="user-welcome" sec:authorize="isAuthenticated()"
+          >Welcome, <span class="highlight" sec:authentication="name"></span>!</div>
+          <span sec:authorize="!isAuthenticated()" >All the support you need in your professional growth.</span>
+        </h4>
+        <img src="images/family.png" class="header__img col-xs. m-6" alt="psych-img" />
+      </div>
+
+</div>
+      <nav class="nav row">
+        <ul class="nav__links">
+          <li class="nav__item col-xs. m-3">
+            <a class="nav__link" href="#section--1" style="opacity: 1"
+              >About as</a
+            >
+          </li>
+          <li class="nav__item col-xs. m-3">
+            <a class="nav__link" href="#section--2">Galleria</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+
+    <div  class="section container" id="section--1">
+      <div class="row">
+        <div class="col-xs. m-6 header__title ">
+          <img
+
+                  src="images/icon.png"
+                  alt="logo"
+                  class="features__img col-xs. m-4  col-lg. m-4"
+                  style="opacity: 0.7; width:450px;"
+          />
+          <div class="features__feature col-xs. m-6 col-lg. m-6">
+            <h5 class="features__header">Our mission</h5>
+            <p>
+              <b>Open Mind</b>  is a community-based space to find and contribute
+              answers to questions in the Psychology, Social work and
+              Speech therapy  fields challenges. We know the struggle of finding
+              support in field where all information is privet,
+              and we are morally obligated to this privacy. We know how hard it is to find advice,
+              understanding or just  someone to laugh to field base jokes.
+              So we are committed to bring together specialists from all around the world and
+              create the community that we deserve.
+              Find support, understanding, friendship. Find your village.
+              The core focus of Open Mind is to serve its members through educational events,
+              networking opportunities, resources, publication and promotion of research,
+              and mentoring the next generation of social and personality psychologists. </br>
+              <b>Benefits of joining Open Mind: </b> Access latest research in your field;
+              direct contact with other bride minds;
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <section class="section" id="section--2">
+      <div class="section__title section__title--testimonials">
+        <h2 class="section__description">Оur experience</h2>
+        <h3 class="section__header">
+          Many found peace and prosper with our programs.
+        </h3>
+      </div>
+
+      <div class="slider">
+        <div class="slide">
+          <div class="testimonial">
+            <img src="images/group-therapy.jpg" alt="group1" />
+          </div>
+        </div>
+
+        <button class="slider__btn slider__btn--left">&larr;</button>
+        <button class="slider__btn slider__btn--right">&rarr;</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+
+    <section class="section section--sign-up">
+      <div class="section__title">
+        <h3 class="section__header">
+          “What day is it?” asked Pooh.<br />
+          “It's today.” squeaked Piglet.<br />
+          “My favorite day!” said Pooh.
+        </h3>
+      </div>
+      <button class="btn btn--show-modal">Register today!</button>
+    </section>
+
+    <footer class="footer">
+      <div th:replace="/fragments/navbar :: footer">Footer</div>
+    </footer>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+  </body>
+</html>

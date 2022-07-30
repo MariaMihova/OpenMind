@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
+<head >
+  <div th:replace="/fragments/navbar :: head">Head</div>
+</head>
+<body>
+<header class="header container">
+  <div class="row" th:replace="/fragments/navbar :: navbar">Navbar</div>
+
+  <h2 class="modal__header row">Login</h2>
+  <th:block  th:if="${loginError}" class="error row">
+    <p class="row" id="login-error">Wrong user or password</p></th:block>
+  <form th:action="@{/login}" th:method="POST" class="modal__form container">
+    <th:block class="row">
+    <label class="col-lg. m-3" for="username">Username</label>
+    <input name="username"  type="text" required class="form-control col-lg. m-6" id="username" />
+    </th:block>
+    <th:block class="row">
+    <label class="col-lg. m-3"  for="password">Password</label>
+    <input  class="col-lg. m-6" name="password" id="password" type="password" />
+    </th:block>
+    <button class="btn btn-success btn-lg" id="article-btn" type="submit">Login &rarr;</button>
+  </form>
+
+</header>
+<footer class="footer">
+  <div th:replace="/fragments/navbar :: footer">Footer</div>
+</footer>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

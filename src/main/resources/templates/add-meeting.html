@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <div th:replace="/fragments/navbar :: head">Head</div>
+</head>
+<body>
+<header class="header">
+    <div th:replace="/fragments/special-fragments :: navbar">Navbar</div>
+
+    <h2 class="modal__header">
+        Add new
+        <span class="highlight">new</span>
+        meeting
+    </h2>
+    <form
+            th:action="@{/add-meeting}"
+            th:method="POST"
+            th:object="${meetingBindingModel}"
+            class="modal__form container">
+
+        <!--todo fix the error css-->
+
+        <th:block class="row">
+            <label class="col-lg. m-1" for="topic">Topic</label>
+            <input class="col-lg. m-6"  th:field="*{topic}" th:errorclass="is-valid" id="topic" type="text"/>
+        </th:block>
+        <th:block class="row" th:if="${#fields.hasErrors('topic')}" >
+            <label class="col-lg. m-1" for="topic-error"></label>
+            <small class="col-lg. m-6" id="topic-error" th:errors="*{topic}" ></small></th:block>
+
+        <th:block class="row">
+            <label class="col-lg. m-1" for="start">Starts at</label>
+            <input class="col-lg. m-6"  th:field="*{start}" th:errorclass="is-valid" id="start" type="datetime-local"/>
+        </th:block>
+        <th:block class="row" th:if="${#fields.hasErrors('start')}" >
+            <label class="col-lg. m-1" for="start-error"></label>
+            <small class="col-lg. m-6" id="start-error" th:errors="*{start}" ></small></th:block>
+
+        <th:block class="row">
+            <label class="col-lg. m-1" for="end">Ends at</label>
+            <input class="col-lg. m-6"  th:field="*{end}" th:errorclass="is-valid" id="end" type="datetime-local"/>
+        </th:block>
+        <th:block class="row" th:if="${#fields.hasErrors('end')}" >
+            <label class="col-lg. m-1" for="end-error"></label>
+            <small class="col-lg. m-6" id="end-error" th:errors="*{end}" ></small></th:block>
+
+        <th:block class="row">
+            <label class="col-lg. m-3"  for="type">Type of the meeting</label>
+            <select  th:field="*{type}"  th:errorclass="bg-danger" id="type" name="type" class="custom-select col-lg. m-6" style="height: 50px"
+                     aria-describedby="categoryHelpInline">
+                <option value="">Type of the meeting</option>
+                <option th:each="t : ${T(com.OpenMind.models.enums.MeetingType).values()}" th:value="${t}" th:text="${t}"></option>
+            </select>
+            <th:block class="row" th:if="${#fields.hasErrors('type')}" >
+                <label class="col-lg. m-1" for="type-error"></label>
+                <small th:error="*{type}" id="type-error" class="bg-danger text-light rounded col-lg. m-6" >Must select type of the meeting!</small>
+            </th:block>
+        </th:block>
+
+        <button class="btn btn-success btn-lg" id="article-btn" type="submit">Add</button>
+    </form>
+</header>
+<footer class="footer">
+    <div th:replace="/fragments/special-fragments :: footer">Footer</div>
+</footer>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+

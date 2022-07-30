@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
+<head >
+    <div th:replace="/fragments/special-fragments :: head">Head</div>
+</head>
+<body>
+<header class="header container">
+    <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+    <div class="row">
+        <div class="col-xs. m-6 col-lg. m-6 header__title ">
+            <!-- <h1 onclick="alert('HTML alert')"> -->
+            <h1 class="title">
+                404  Something went
+                <!-- Green highlight effect -->
+                <span class="highlight">wrong!</span>
+                Please,<br />
+                go back to  <a class="highlight" th:href="@{/home}"  style="text-decoration:none; color:black">home</a></br>
+                or to your <a class="highlight" th:href="@{/profile}"  style="text-decoration:none; color:black">profile</a>
+            </h1>
+            <img src="/images/icon.png" class="header__img col-xs. m-6 col-lg. m-6" alt="psych-img" />
+        </div>
+    </div>
+
+
+
+</header>
+</body>
+<footer class="footer">
+    <div th:replace="/fragments/special-fragments :: footer">Footer</div>
+</footer>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
+  <head>
+    <div th:replace="/fragments/navbar :: head">Head</div>
+  </head>
+  <body>
+  <header class="header container">
+    <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+    <div class="row">
+      <div class="col-xs. m-6 header__title ">
+        <!-- <h1 onclick="alert('HTML alert')"> -->
+        <h1 class="title">
+          <!-- Be -->
+          <!-- Green highlight effect -->
+          <span class="highlight">Social work</span>
+          is<br />
+          a work
+          <span class="highlight">of heart.</span>
+          <!-- <br />-Mahatma Gandhi -->
+        </h1>
+        <h4 class="subtitle">
+          <div id="user-welcome" sec:authorize="isAuthenticated()"
+          >Be the change you want to see in the world!</div>
+        </h4>
+        <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
+        <img src="images/socio2.png" class="header__img col-xs. m-6" alt="socio-img" />
+      </div>
+
+    </div>
+    <nav class="nav row">
+      <ul class="nav__links">
+        <li class="nav__item col-xs. m-3">
+          <a class="nav__link" href="#section--1" style="opacity: 1"
+          >Find others</a
+          >
+        </li>
+        <li class="nav__item col-xs. m-3">
+          <a class="nav__link" href="#section--2">Articles</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="section container" id="section--1">
+    <div th:each="s : ${specialists}" class="row">
+      <div class="header__title ">
+        <img
+
+                src="images/digital-lazy.jpg"
+                data-src="images/digital.jpg"
+                alt="Computer"
+                class="features__img lazy-img col-lg. m-4 "
+        />
+        <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
+        <div class="features__feature col-lg. m-8 ">
+          <h5 th:text="${s.getFullName()}" class="features__header highlight">Две Имена на рандъм Специалист</h5>
+          <p>
+            <b> Образование и професионален опит</b> Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat.
+          </p>
+          <a class="btn btn-warning btn-lg" id="btn-details" th:href="@{/profile-details/{id}(id=${s.getId()})}">Details</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section container" id="section--2">
+    <div class="operations">
+
+      <div class="row">
+        <div class="operations__icon operations__icon--1">
+          <img  src="images/Book-icon.png" class="features__icon col-lg. m-2 col-sx. m-2" alt="upload">
+        </div>
+        <h5 class="operations__header col-lg. m-4 col-sx. m-4" id="articles">Social work articles</h5>
+      </div>
+      <div class="operations__content operations__content--1 operations__content--active">
+
+        <!--        todo make it pageable-->
+        <p  class="row" th:each="a : ${socialArticles}">
+          <th:block class="container">
+            <strong>
+              <a class="row"  th:href="@{/article/{id} (id=${a.getId()})}" th:value="${a.getTitle()}" th:text="${a.getTitle()}"
+                 style="text-decoration:none; color:black"></a> </strong><br/>
+            <span class="row"  th:value="${a.getSummery()}" th:text="${a.getSummery()}"></span><br/>
+            <strong>
+              <span class="row"  th:value="${a.getUsername()}" th:text="${a.getUsername()}"></span></strong>
+          </th:block>
+        </p>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div th:replace="/fragments/navbar :: footer">Footer</div>
+    </footer>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+  </body>
+</html>

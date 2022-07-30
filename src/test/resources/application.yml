@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:testdb;sql.syntax_mys=true
+  jpa:
+#    hibernate:
+#      ddl-auto: create-update
+    generate-ddl: true
+
+
+#Cloudinary Properties
+cloudinary:
+  api-key: 712497974944343
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: ddm1dgb32
