@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProfessionalFieldRepository extends JpaRepository<ProfessionalField, Long> {
-    ProfessionalField findByFieldName(FieldName field);
+    ProfessionalField findTopByFieldName(FieldName field);
 
 }

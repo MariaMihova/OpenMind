@@ -47,7 +47,8 @@ public class Client extends BaseEntity{
         this.gender = gender;
     }
 
-    @Column(name = "initial_request", columnDefinition = "TEXT", nullable = false)
+    @Lob
+    @Column(name = "initial_request", nullable = false)
     public String getInitialRequest() {
         return initialRequest;
     }

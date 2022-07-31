@@ -56,7 +56,7 @@ public class ProfessionalFieldServiceImplTest {
         ProfessionalField expectedField = new ProfessionalField();
         expectedField.setFieldName(FieldName.PSYCHOLOGY);
 
-        when(mockRepository.findByFieldName(FieldName.PSYCHOLOGY))
+        when(mockRepository.findTopByFieldName(FieldName.PSYCHOLOGY))
                 .thenReturn(expectedField);
 
        ProfessionalField actualField = toTest.findByFieldName(FieldName.PSYCHOLOGY);

@@ -9,7 +9,7 @@ public class Article extends BaseEntity {
 
     private String title;
     private String content;
-    private LocalDate date;
+    private LocalDate created;
     private ProfessionalField professionalField;
     private UserEntity user;
 
@@ -25,7 +25,8 @@ public class Article extends BaseEntity {
         this.title = title;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
+    @Column(nullable = false)
     public String getContent() {
         return content;
     }
@@ -35,12 +36,12 @@ public class Article extends BaseEntity {
     }
 
     @Column(nullable = false)
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getCreated() {
+        return created;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 
     @ManyToOne

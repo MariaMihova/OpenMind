@@ -79,6 +79,7 @@ public class UserProfileController {
        UserViewModel userViewDetails = userService.findById(id);
        List<ArticleVewModel> userArticles = articleService.findArticlesByUser(userService.findById(id).getUsername());
         PictureViewModel pictureViewModel = pictureService.getProfilePicture(userService.findById(id).getUsername());
+        ContactViewModel contactViewModel = contactsService.findContactByUserId(id);
 
         if(userViewDetails != null){
             if(userViewDetails.getUsername().equalsIgnoreCase(principal.getName())){
@@ -88,6 +89,7 @@ public class UserProfileController {
             modelAndView.addObject("userViewDetails", userViewDetails);
             modelAndView.addObject("userArticles", userArticles);
             modelAndView.addObject("pictureViewModel", pictureViewModel);
+            modelAndView.addObject("contactViewModel", contactViewModel);
             modelAndView.setViewName("profile-details");
         }else {
             throw new ResourceNotFoundException();

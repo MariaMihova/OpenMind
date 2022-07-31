@@ -25,7 +25,7 @@ public class ArticleBindingModel {
     }
 
     @NotNull
-    @Size(min = 200)
+    @Size(min = 20)
     public String getContent() {
         return content;
     }

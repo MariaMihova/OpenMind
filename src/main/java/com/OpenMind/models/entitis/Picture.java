@@ -24,7 +24,8 @@ public class Picture extends BaseEntity {
         this.title = title;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
+    @Column(nullable = false)
     public String getUrl() {
         return url;
     }

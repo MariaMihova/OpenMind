@@ -12,4 +12,8 @@ public interface ContactsRepository extends JpaRepository<Contacts, Long> {
 
     @Query("select new com.OpenMind.models.viewModels.ContactViewModel(concat(c.city, ', ', c.country), c.phoneNumber, c.email) from UserEntity u join u.contacts c where u.username= :username")
     ContactViewModel findByUsername(@Param(value = "username") String username);
+
+    @Query("select new com.OpenMind.models.viewModels.ContactViewModel(concat(c.city, ', ', c.country), c.phoneNumber, c.email) from UserEntity u join u.contacts c where u.id= :id")
+    ContactViewModel findByUserId(@Param(value = "id") long id);
+
 }

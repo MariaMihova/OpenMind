@@ -51,4 +51,13 @@ public class ContactsServiceImpl implements ContactsService {
         }
         return contactViewModel;
     }
+
+    @Override
+    public ContactViewModel findContactByUserId(long id) {
+        ContactViewModel contactViewModel = contactsRepository.findByUserId(id);
+        if(contactViewModel == null){
+            return new ContactViewModel("N/A", "N/A", "N/A");
+        }
+        return contactViewModel;
+    }
 }

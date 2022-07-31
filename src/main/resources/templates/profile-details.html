@@ -57,28 +57,25 @@
         </div>
     </div>
 
-    <div class="operations__content operations__content--2">
-        <div class="operations__icon operations__icon--2">
-            <svg>
-                <use xlink:href="images/icons.svg#icon-home"></use>
-            </svg>
-        </div>
-    </div>
-    <div class="operations__content operations__content--3">
-        <div class="operations__icon operations__icon--3">
-            <svg>
-                <use xlink:href="images/icons.svg#icon-user-x"></use>
-            </svg>
-        </div>
-        <h5 class="operations__header">
-            <!--      todo      No longer need your account? No problem! Close it instantly.-->
-        </h5>
-        <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-        </p>
+    <div id="contacts" class="container">
+        <section class="section">
+
+            <div class="row">
+                <div class="operations__icon operations__icon--1">
+                    <img src="/images/contacts.png" class="features__icon" alt="upload">
+                </div>
+                <h5 class="operations__header col-lg. m-4 col-sx. m-4">Contacts</h5>
+            </div>
+
+            <div clas="container" th:object="${contactViewModel}">
+                <div class="testimonial">
+                    <h5 class="address col-lg. m-4 col-sx. m-4" th:value="*{address}" th:text="*{address}"></h5>
+                    <h6 class="address col-lg. m-4 col-sx. m-4"  th:value="*{phoneNumber}" th:text="*{phoneNumber}"></h6>
+                    <h6  class="address col-lg. m-4 col-sx. m-4" th:value="*{email}" th:text="*{email}"></h6>
+
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 <script

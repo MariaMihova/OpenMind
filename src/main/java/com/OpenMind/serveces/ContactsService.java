@@ -11,4 +11,6 @@ public interface ContactsService {
 
     ContactViewModel findContactByUserName(String name);
 
+    ContactViewModel findContactByUserId(long id);
+
 }

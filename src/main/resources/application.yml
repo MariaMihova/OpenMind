@@ -15,7 +15,7 @@ pring:
 spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
-        password: phietee5ahGai4eDeiwoola2gahdohsa
+        password:
         url: jdbc:mysql://192.168.1.208:3306/open_mind?useSSL=false&createDatabaseIfNotExist=true
         username: root
     jpa:

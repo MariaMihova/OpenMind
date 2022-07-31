@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -42,7 +43,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         Article article = modelMapper.map(articleBindingModel, Article.class);
         article.setProfessionalField(professionalFieldService.findByFieldName(FieldName.valueOf(articleBindingModel.getProfessionalField())));
-        article.setDate(LocalDate.now());
+        article.setCreated(LocalDate.now());
         UserEntity userEntity = userService.findByUsername(username);
         article.setUser(userEntity);
 
@@ -104,9 +105,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private boolean isAdmin(UserEntity user) {
+//
+        if(user == null){
+            return false;
+        }
 
-        return user.getAuthorities()
-                .stream()
+        Set<UserRole> authorities = user.getAuthorities();
+
+        return authorities.stream()
                 .map(UserRole::getRole)
                 .anyMatch(r -> r == Role.ADMIN);
     }

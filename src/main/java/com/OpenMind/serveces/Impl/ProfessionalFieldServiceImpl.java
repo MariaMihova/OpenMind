@@ -35,6 +35,8 @@ public class ProfessionalFieldServiceImpl implements ProfessionalFieldService {
 
     @Override
     public ProfessionalField findByFieldName(FieldName field) {
-        return fieldRepository.findByFieldName(field);
+        ProfessionalField professionalField = fieldRepository.findTopByFieldName(field);
+
+        return professionalField;
     }
 }

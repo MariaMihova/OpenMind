@@ -4,6 +4,7 @@ import com.OpenMind.models.enums.FieldName;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -29,7 +30,8 @@ public class ProfessionalField extends BaseEntity{
         this.fieldName = fieldName;
     }
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
+    @Column()
     public String getDescription() {
         return description;
     }
