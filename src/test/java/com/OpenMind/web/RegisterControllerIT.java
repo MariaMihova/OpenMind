@@ -33,14 +33,14 @@ public class RegisterControllerIT {
     void testRegisterMethod() throws Exception {
 
         mockMvc.perform(post("/registration")
-                .param("username", "AnnaP")
-                .param("rowPassword", "matrix")
-                .param("confirmPassword", "matrix")
-                .param("firstName", "Anna")
-                .param("lastName", "Petrova")
+                        .param("username", "AnnaP")
+                        .param("rowPassword", "matrix")
+                        .param("confirmPassword", "matrix")
+                        .param("firstName", "Anna")
+                        .param("lastName", "Petrova")
                         .param("professionalField", "PSYCHOLOGY")
-                .with(csrf())
-        )
+                        .with(csrf())
+                )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/add-contacts"));
     }

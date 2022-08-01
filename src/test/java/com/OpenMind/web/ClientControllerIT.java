@@ -1,11 +1,16 @@
 package com.OpenMind.web;
 
+import com.OpenMind.models.entitis.Client;
 import com.OpenMind.models.entitis.ProfessionalField;
 import com.OpenMind.models.entitis.UserEntity;
 import com.OpenMind.models.entitis.UserRole;
 import com.OpenMind.models.enums.FieldName;
+import com.OpenMind.models.enums.Gender;
 import com.OpenMind.models.enums.Role;
-import com.OpenMind.repositories.*;
+import com.OpenMind.repositories.ClientRepository;
+import com.OpenMind.repositories.ProfessionalFieldRepository;
+import com.OpenMind.repositories.UserRepository;
+import com.OpenMind.repositories.UserRoleRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,13 +29,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ContactsControllerIT {
-
+public class ClientControllerIT {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ContactsRepository contactsRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -74,7 +78,7 @@ public class ContactsControllerIT {
     @AfterEach
     void tearDown() {
         userRepository.deleteAll();
-        contactsRepository.deleteAll();
+        clientRepository.deleteAll();
         userRoleRepository.deleteAll();
         professionalFieldRepository.deleteAll();
 
@@ -82,28 +86,44 @@ public class ContactsControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "testUser", roles = {"ADMIN"})
-    void addContactsPage() throws Exception {
+    @WithMockUser
+    void addClientPageTest() throws Exception {
 
-        mockMvc.perform(get("/add-contacts"))
+        mockMvc.perform(get("/add-client"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/add-contacts"));
+                .andExpect(view().name("/add-client"));
+
     }
 
     @Test
     @WithMockUser(username = USERNAME)
-    void addContactsMethod() throws Exception {
+    void addClientMethod() throws Exception {
 
-        mockMvc.perform(post("/add-contacts")
-                        .param("country", "USA")
-                        .param("city", "Gotham")
-                        .param("phoneNumber", "0878010101")
-                        .param("email", "test@gmail.com")
+        mockMvc.perform(post("/add-client")
+                        .param("initials", "AJ")
+                        .param("age", "20")
+                        .param("initialRequest", "the clients initial requestthe clients initial requestthe clients initial request")
+                        .param("gender", "MAN")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/add-picture"));
+                .andExpect(redirectedUrl("/profile#clients"));
 
 
     }
 
+
+
+
+    private Client initArticle(){
+
+        Client client = new Client();
+        client.setInitials("A.J.");
+        client.setInitialRequest("the clients initial request");
+        client.setAge(20);
+        client.setGender(Gender.MAN);
+
+        clientRepository.save(client);
+        return client;
+
+    }
 }

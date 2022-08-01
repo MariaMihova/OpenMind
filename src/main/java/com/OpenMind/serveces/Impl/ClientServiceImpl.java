@@ -48,6 +48,9 @@ public class ClientServiceImpl implements ClientService {
         }
 
         UserEntity user = userService.findByUsername(principal.getName());
+//        if(user == null){
+//            return false;
+//        }
 
         user.addClient(client);
 

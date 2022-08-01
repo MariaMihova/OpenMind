@@ -36,7 +36,6 @@
         <p  class="row" th:value="${article.getContent()}" th:text="${article.getContent()}">The article</p>
         <div class="operations row">
 
-            <!-- todo hide the buttons-->
             <th:block th:if="${isOwner}">
             <form class="operations__tab-container" th:action="@{/article/{id} (id=${article.getId()})}" th:method="DELETE">
                 <a  class="col-lg. m-4 col-sx. m-4 btn btn-warning btn-lg" id="meetings-btn" th:href="@{/article/{id}/edit(id=${article.getId()})}" style="text-decoration:none; color:black">Update</a>

@@ -27,6 +27,8 @@ public class ContactsController {
     private ContactsBindingModel contactsBindingModel(){
         return new ContactsBindingModel();
     }
+
+
     @GetMapping("add-contacts")
     public String addContactsPage(){
         return "/add-contacts";

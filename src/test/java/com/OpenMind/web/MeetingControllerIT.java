@@ -24,13 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ContactsControllerIT {
+public class MeetingControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ContactsRepository contactsRepository;
+    private MeetingRepository meetingRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -73,8 +73,8 @@ public class ContactsControllerIT {
 
     @AfterEach
     void tearDown() {
+        meetingRepository.deleteAll();
         userRepository.deleteAll();
-        contactsRepository.deleteAll();
         userRoleRepository.deleteAll();
         professionalFieldRepository.deleteAll();
 
@@ -82,28 +82,29 @@ public class ContactsControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "testUser", roles = {"ADMIN"})
-    void addContactsPage() throws Exception {
+    @WithMockUser
+    void addMeetingPageTest() throws Exception {
 
-        mockMvc.perform(get("/add-contacts"))
+        mockMvc.perform(get("/add-meeting"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/add-contacts"));
+                .andExpect(view().name("add-meeting"));
+
     }
+
 
     @Test
     @WithMockUser(username = USERNAME)
-    void addContactsMethod() throws Exception {
+    void addMeetingMethod() throws Exception {
 
-        mockMvc.perform(post("/add-contacts")
-                        .param("country", "USA")
-                        .param("city", "Gotham")
-                        .param("phoneNumber", "0878010101")
-                        .param("email", "test@gmail.com")
+        mockMvc.perform(post("/add-meeting")
+                        .param("topic", "Meeting topic")
+                        .param("start", "2023-12-12T08:00:00")
+                        .param("end", "2023-12-12T09:00:00")
+                        .param("type", "ONLINE")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/add-picture"));
+                .andExpect(redirectedUrl("/profile#meetings"));
 
 
     }
-
 }

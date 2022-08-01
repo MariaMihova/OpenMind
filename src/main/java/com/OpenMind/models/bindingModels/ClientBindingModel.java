@@ -47,7 +47,7 @@ public class ClientBindingModel {
     }
 
     @NotNull
-    @Size(min = 50)
+    @Size(min = 20)
     public String getInitialRequest() {
         return initialRequest;
     }

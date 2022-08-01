@@ -50,7 +50,7 @@ public class UserProfileController {
         pictureViewModel.setEdit(!pictureViewModel.getTitle().equalsIgnoreCase("No profile picture"));
         ContactViewModel contactViewModel = contactsService.findContactByUserName(principal.getName());
 
-        modelAndView.addObject("principal", principal);
+//        modelAndView.addObject("principal", principal);
         modelAndView.addObject("userArticles", userArticles);
         modelAndView.addObject("clients", clients);
         modelAndView.addObject("meetings", meetings);

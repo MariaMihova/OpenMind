@@ -24,13 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ContactsControllerIT {
+public class PictureControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ContactsRepository contactsRepository;
+    private PictureRepository pictureRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -74,36 +74,49 @@ public class ContactsControllerIT {
     @AfterEach
     void tearDown() {
         userRepository.deleteAll();
-        contactsRepository.deleteAll();
+        pictureRepository.deleteAll();
         userRoleRepository.deleteAll();
         professionalFieldRepository.deleteAll();
 
-
     }
 
     @Test
-    @WithMockUser(username = "testUser", roles = {"ADMIN"})
-    void addContactsPage() throws Exception {
+    @WithMockUser
+    void addPicturePageTest() throws Exception {
 
-        mockMvc.perform(get("/add-contacts"))
+        mockMvc.perform(get("/add-picture"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/add-contacts"));
+                .andExpect(view().name("/add-picture"));
+
     }
+
+    //todo ask how to test add picture
+
+//    @Test
+//    @WithMockUser(username = USERNAME)
+//    void addArticleMethod() throws Exception {
+//
+//        mockMvc.perform(post("/add-picture")
+//                        .param("title", "Picture title")
+//                        .param("picture", "\"C:\\Users\\mivan\\OneDrive\\Desktop\\posters\\Harley.jpg\"")
+//                        .with(csrf()))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("/home"));
+//
+//
+//    }
 
     @Test
-    @WithMockUser(username = USERNAME)
-    void addContactsMethod() throws Exception {
+    @WithMockUser
+    void editPicturePageTest() throws Exception {
 
-        mockMvc.perform(post("/add-contacts")
-                        .param("country", "USA")
-                        .param("city", "Gotham")
-                        .param("phoneNumber", "0878010101")
-                        .param("email", "test@gmail.com")
-                        .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/add-picture"));
-
+        mockMvc.perform(get("/edit-picture"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/edit-picture"));
 
     }
+
+    //todo edit picture post method
+
 
 }

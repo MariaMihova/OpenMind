@@ -2,6 +2,7 @@ package com.OpenMind.web;
 
 import com.OpenMind.models.entitis.*;
 import com.OpenMind.models.enums.FieldName;
+import com.OpenMind.models.enums.MeetingType;
 import com.OpenMind.models.enums.Role;
 import com.OpenMind.repositories.*;
 import com.OpenMind.serveces.ArticleService;
@@ -13,15 +14,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -49,17 +52,26 @@ public class ArticleControllerIT {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
+    @Autowired
+    private MeetingRepository meetingRepository;
+
+//    @Autowired
+//    private WebApplicationContext webApplicationContext;
+
     private static final String USERNAME = "TestUser";
     private static final String PASSWORD = "TestPassword";
     private UserEntity user;
     private ProfessionalField field;
     private Contacts contacts;
+    private  Article article;
+    private Meeting meeting;
 
     @BeforeEach
     public void setUp() {
+
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
          user = new UserEntity();
          contacts = new Contacts();
-//        Picture picture = new Picture();
 
         contacts.setCountry("USA");
         contacts.setCity("Gotham");
@@ -85,27 +97,23 @@ public class ArticleControllerIT {
         user.setContacts(contacts);
         userRepository.save(user);
 
-//        List<GrantedAuthority> authorities = user.getAuthorities().stream().map(r -> {
-//            return new SimpleGrantedAuthority("ROLE_".concat(r.getRole().name()));
-//        }).collect(Collectors.toList());
-//
-//        Long userId = user.getId();
+    }
+
+    @AfterEach
+    void tearDown() {
+        articleRepository.deleteAll();
+        meetingRepository.deleteAll();
+        userRepository.deleteAll();
+        contactsRepository.deleteAll();
+        userRoleRepository.deleteAll();
+        professionalFieldRepository.deleteAll();
+
 
     }
 
-//    @AfterEach
-//    void tearDown() {
-//
-//        userRepository.deleteAll();
-//        contactsRepository.deleteAll();
-//        userRoleRepository.deleteAll();
-//        professionalFieldRepository.deleteAll();
-//
-//    }
-
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @WithMockUser()
     void addArticlePage() throws Exception {
 
         mockMvc.perform(get("/add-article"))
@@ -113,16 +121,11 @@ public class ArticleControllerIT {
                 .andExpect(view().name("add-article"));
 
 
-        userRepository.deleteAll();
-        contactsRepository.deleteAll();
-//        userRoleRepository.deleteAll();
-//        professionalFieldRepository.deleteAll();
-
 
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @WithMockUser()
     void addArticleMethod() throws Exception {
 
         mockMvc.perform(post("/add-article")
@@ -133,15 +136,11 @@ public class ArticleControllerIT {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/profile"));
 
-        userRepository.deleteAll();
-        contactsRepository.deleteAll();
-        userRoleRepository.deleteAll();
-
 
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @WithMockUser()
     void articlePage() throws Exception {
 
         Article article = initArticle();
@@ -155,6 +154,30 @@ public class ArticleControllerIT {
 
     }
 
+    //todo ask about @PreAuthorize methods
+//    @Test
+//    @WithMockUser(username = "admin", roles = {"ADMIN"})
+//    void deleteArticle() throws Exception {
+//        article = initArticle();
+//
+//        mockMvc.perform(delete("/article/" + article.getId()))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("/profile"));
+//
+//    }
+
+
+//    @Test
+//    @WithMockUser
+//    void editArticlePage() throws Exception {
+//        article = initArticle();
+//
+//        mockMvc.perform(get("/article/" + article.getId() + "/edit"))
+//                .andExpect(model().attributeExists("article"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("article-edit"));
+//    }
+
     private Article initArticle(){
 
         Article article = new Article();
@@ -166,6 +189,31 @@ public class ArticleControllerIT {
 
         articleRepository.save(article);
         return article;
+    }
+
+
+
+    private Picture initPicture(){
+        Picture picture = new Picture();
+        picture = new Picture();
+        picture.setTitle("No profile picture");
+        picture.setUrl("images/defalt-user");
+        picture.setPublicId("");
+        pictureRepository.save(picture);
+        return picture;
+    }
+
+    private Meeting initMeeting(){
+        meeting = new Meeting();
+        meeting.setTopic("Meeting");
+        meeting.setStart(LocalDateTime.of(2023, 12, 12, 8, 0, 0));
+        meeting.setEnd(LocalDateTime.of(2023, 12, 12, 9, 0, 0));
+        meeting.setType(MeetingType.ONLINE);
+        meeting.setCreator(user);
+
+        meetingRepository.save(meeting);
+        return meeting;
+
     }
 
 

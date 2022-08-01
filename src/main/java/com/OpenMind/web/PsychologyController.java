@@ -39,15 +39,3 @@ public class PsychologyController {
 
     }
 }
-
-
-// @GetMapping("/profile")
-//    public ModelAndView profilePage(HttpSession httpSession, ModelAndView modelAndView, Principal principal) {
-//
-//        List<ArticleVewModel> userArticles = articleService.findArticlesByUser(principal.getName());
-//
-//        modelAndView.addObject("userArticles", userArticles);
-//        modelAndView.setViewName("profile");
-//
-//        return modelAndView;
-//    }
