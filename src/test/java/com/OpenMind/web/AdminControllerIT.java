@@ -84,7 +84,7 @@ public class AdminControllerIT {
     }
 
 //    @Test
-//    @WithMockUser(username = USERNAME, )
+//    @WithMockUser(username = USERNAME, roles = {"ADMIN"})
 //    void adminPag() throws Exception {
 //        mockMvc.perform(get("/admin"))
 //                .andExpect(status().isOk())

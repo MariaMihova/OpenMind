@@ -155,16 +155,17 @@ public class ArticleControllerIT {
     }
 
     //todo ask about @PreAuthorize methods
-//    @Test
-//    @WithMockUser(username = "admin", roles = {"ADMIN"})
-//    void deleteArticle() throws Exception {
-//        article = initArticle();
-//
-//        mockMvc.perform(delete("/article/" + article.getId()))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/profile"));
-//
-//    }
+
+    @Test
+    @WithMockUser(username = USERNAME, roles = {"ADMIN"})
+    void deleteArticle() throws Exception {
+        article = initArticle();
+
+        mockMvc.perform(delete("/article/" + article.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/profile#articles"));
+
+    }
 
 
 //    @Test

@@ -83,9 +83,14 @@ public class ArticleServiceImpl implements ArticleService {
             return false;
         }
 
+
         Article article = articleOp.get();
 
-        return isAdmin(userService.findByUsername(currentUserName)) || article.getUser().getUsername().equalsIgnoreCase(currentUserName);
+        if(article.getUser().getUsername().equalsIgnoreCase(currentUserName)) {
+            return true;
+        }
+
+        return isAdmin(userService.findByUsername(currentUserName));
 
     }
 
