@@ -1,6 +1,7 @@
 package com.OpenMind.serveces;
 
 import com.OpenMind.models.bindingModels.ArticleBindingModel;
+import com.OpenMind.models.entitis.Article;
 import com.OpenMind.models.serviceModels.ArticleUpdateServiceModel;
 import com.OpenMind.models.viewModels.ArticleFullContentViewModel;
 import com.OpenMind.models.viewModels.ArticleVewModel;
@@ -21,4 +22,7 @@ public interface ArticleService {
     List<ArticleVewModel> findArticlesByProfessionalField(Long id);
 
     boolean isOwner(String currentUserName, Long id);
+
+    List<ArticleVewModel> getLatest();
+
 }

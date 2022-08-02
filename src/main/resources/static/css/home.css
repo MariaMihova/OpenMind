@@ -240,6 +240,16 @@ h1 {
 .features__img {
  padding: 3rem;
   width: 100%;
+  grid-column: 2 / 3;
+    grid-row: 1 / span 4;
+    transform: translateY(-6rem);
+}
+.features__img__side {
+ padding: 3rem;
+  width: 70%;
+  grid-column: 2 / 1;
+    grid-row: 1 / span 4;
+    transform: translateY(-6rem);
 }
 
 .features__feature {
@@ -552,6 +562,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 5rem;
+  color: white
 }
 
 .footer__item {
@@ -796,6 +807,7 @@ ul {
 .address{
 font-size: 2rem;}
 
-
-
+.bg-img{
+background-image: url('images/socio4.png');
+}
 

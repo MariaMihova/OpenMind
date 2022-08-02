@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Repository
@@ -18,4 +17,10 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("select new com.OpenMind.models.viewModels.ArticleVewModel(a.id, a.title, substring(a.content,1, 200), u.username) from Article a join a.user u join a.professionalField f where f.id= :id")
     List<ArticleVewModel> findAllByProfessionalFieldId(@Param(value = "id") Long id);
+
+//    @Query("select new com.OpenMind.models.viewModels.ArticleVewModel( a.id, a.title, substring(a.content,1, 200), u.username) from Article a join a.user u order by a.created")
+    List<Article> findTop5ByOrderByCreated();
+
+
+
 }

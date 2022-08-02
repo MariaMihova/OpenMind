@@ -17,9 +17,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -92,6 +94,21 @@ public class ArticleServiceImpl implements ArticleService {
 
         return isAdmin(userService.findByUsername(currentUserName));
 
+    }
+
+    @Override
+    public List<ArticleVewModel> getLatest() {
+        List<Article> articles = articleRepository.findTop5ByOrderByCreated();
+        List<ArticleVewModel> viewArticles = new ArrayList<>();
+
+        articles.forEach(a -> {
+            ArticleVewModel view = new ArticleVewModel();
+            modelMapper.map(a, view);
+            view.setSummery(a.getContent().substring(0, 20));
+            view.setUsername(a.getUser().getUsername());
+            viewArticles.add(view);
+        });
+        return viewArticles;
     }
 
     @Override

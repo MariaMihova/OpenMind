@@ -28,7 +28,10 @@
     </a>
     <ul class="nav__links">
         <li class="nav-item">
-            <a class="nav__link" th:href="@{/home}">Home</a>
+            <a sec:authorize="!isAuthenticated()" class="nav__link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a sec:authorize="isAuthenticated()" class="nav__link" th:href="@{/home}">Home</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item ">
             <a class="nav__link" th:href="@{/psychology}">Psychology</a>
@@ -60,15 +63,21 @@
 </header>
 <footer th:fragment="footer" class="footer">
     <ul class="footer__nav">
-<!--        todo links don't work. Fix!-->
-        <li class="footer__item">
-            <a class="footer__link" href="/psychology">Psychology</a>
         </li>
-        <li class="footer__item">
-            <a class="footer__link" href="/social-work">Social Work</a>
+        <li sec:authorize="isAuthenticated()" class="nav-item ">
+            <a class="nav__link" th:href="@{/psychology}">Psychology</a>
         </li>
-        <li class="footer__item">
-            <a class="footer__link" href="/speech-therapy">Speech Therapy</a>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav__link" th:href="@{/social-work}">Social Work</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav__link" th:href="@{/speech-therapy}">Speech Therapy</a>
+        </li>
+        <li  class="nav-item">
+            <a sec:authorize="!isAuthenticated()" class="nav__link" th:href="@{/login}">Login</a>
+        </li>
+        <li  class="nav-item">
+            <a sec:authorize="!isAuthenticated()" class="nav__link" th:href="@{/registration}">Registration</a>
         </li>
     </ul>
     <img src="images/logo.png" alt="Logo" class="footer__logo" />

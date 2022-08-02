@@ -1,15 +1,26 @@
 package com.OpenMind.web;
 
 
+import com.OpenMind.models.entitis.*;
+import com.OpenMind.models.enums.FieldName;
+import com.OpenMind.models.enums.Role;
+import com.OpenMind.repositories.ArticleRepository;
+import com.OpenMind.repositories.ProfessionalFieldRepository;
+import com.OpenMind.repositories.UserRepository;
+import com.OpenMind.repositories.UserRoleRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,18 +30,84 @@ public class HomeControllerIT {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ArticleRepository articleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private ProfessionalFieldRepository professionalFieldRepository;
+
+    private static final String USERNAME = "TestUser";
+    private static final String PASSWORD = "TestPassword";
+    private UserEntity user;
+    private Article article;
+    private ProfessionalField field;
+
+    @BeforeEach
+    public void setUp() {
+
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        user = new UserEntity();
+
+        UserRole userRole = new UserRole();
+        userRole.setRole(Role.ADMIN);
+        userRoleRepository.save(userRole);
+
+        field = new ProfessionalField();
+        field.setFieldName(FieldName.PSYCHOLOGY);
+        field.setDescription("Description for field PSYCHOLOGY");
+        professionalFieldRepository.save(field);
+
+        user.setUsername(USERNAME);
+        user.setPassword(PASSWORD);
+        user.setFirstName("Tset");
+        user.setLastName("Testov");
+        user.setAuthorities(userRoleRepository.findTopByRole(Role.ADMIN));
+        user.setProfessionalField(field);
+        userRepository.save(user);
+
+        article = new Article();
+        article.setTitle("ArticleTitle");
+        article.setContent("qwertyuiopasdfghjklzxcvbnm");
+        article.setCreated(LocalDate.now());
+        article.setProfessionalField(field);
+        article.setUser(user);
+
+        articleRepository.save(article);
+
+    }
+
+    @AfterEach
+    void tearDown() {
+        articleRepository.deleteAll();
+        userRepository.deleteAll();
+        userRoleRepository.deleteAll();
+        professionalFieldRepository.deleteAll();
+
+
+    }
+
+
+
     @Test
     void testIndexPage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/home"));
+                .andExpect(view().name("/index"));
     }
 
     @Test
+    @WithMockUser(USERNAME)
     void testHomePage() throws Exception {
         mockMvc.perform(get("/home"))
+                .andExpect(model().attributeExists("articles"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/home"));
+                .andExpect(view().name("home"));
     }
 
 
