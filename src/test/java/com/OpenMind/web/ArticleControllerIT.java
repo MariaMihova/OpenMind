@@ -2,27 +2,22 @@ package com.OpenMind.web;
 
 import com.OpenMind.models.entitis.*;
 import com.OpenMind.models.enums.FieldName;
-import com.OpenMind.models.enums.MeetingType;
 import com.OpenMind.models.enums.Role;
 import com.OpenMind.repositories.*;
-import com.OpenMind.serveces.ArticleService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
+
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -80,7 +75,8 @@ public class ArticleControllerIT {
 
         contactsRepository.save(contacts);
 
-        UserRole userRole = new UserRole(Role.ADMIN);
+        UserRole userRole = new UserRole();
+        userRole.setRole(Role.ADMIN);
         userRoleRepository.save(userRole);
 
         field = new ProfessionalField();
@@ -92,10 +88,19 @@ public class ArticleControllerIT {
         user.setPassword(PASSWORD);
         user.setFirstName("Tset");
         user.setLastName("Testov");
-        user.setAuthorities(Set.of(userRole));
+        user.setAuthorities(userRoleRepository.findTopByRole(Role.ADMIN));
         user.setProfessionalField(field);
         user.setContacts(contacts);
         userRepository.save(user);
+
+        article = new Article();
+        article.setTitle("ArticleTitle");
+        article.setContent("qwertyuiopasdfghjklzxcvbnm");
+        article.setCreated(LocalDate.now());
+        article.setProfessionalField(field);
+        article.setUser(user);
+
+        articleRepository.save(article);
 
     }
 
@@ -143,7 +148,6 @@ public class ArticleControllerIT {
     @WithMockUser()
     void articlePage() throws Exception {
 
-        Article article = initArticle();
 
         mockMvc.perform(get("/article/" + article.getId()))
                 .andExpect(status().isOk())
@@ -154,68 +158,48 @@ public class ArticleControllerIT {
 
     }
 
-    //todo ask about @PreAuthorize methods
-
     @Test
-    @WithMockUser(username = USERNAME, roles = {"ADMIN"})
+    @WithMockUser(username = USERNAME)
     void deleteArticle() throws Exception {
-        article = initArticle();
 
-        mockMvc.perform(delete("/article/" + article.getId()))
+
+        mockMvc.perform(delete("/article/{id}", article.getId())
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/profile#articles"));
 
     }
 
 
-//    @Test
-//    @WithMockUser
-//    void editArticlePage() throws Exception {
-//        article = initArticle();
-//
-//        mockMvc.perform(get("/article/" + article.getId() + "/edit"))
-//                .andExpect(model().attributeExists("article"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("article-edit"));
-//    }
+    @Test
+    @WithMockUser(USERNAME)
+    void editArticlePage() throws Exception {
 
-    private Article initArticle(){
+        mockMvc.perform(get("/article/{id}/edit", article.getId())
+                        .with(csrf()))
+                .andExpect(model().attributeExists("article"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("article-edit"));
+    }
 
-        Article article = new Article();
-        article.setTitle("ArticleTitle");
-        article.setContent("qwertyuiopasdfghjklzxcvbnm");
-        article.setCreated(LocalDate.now());
-        article.setProfessionalField(field);
-        article.setUser(user);
 
-        articleRepository.save(article);
-        return article;
+    @Test
+    @WithMockUser(username = USERNAME)
+    void editArticleMethod() throws Exception {
+
+
+        mockMvc.perform(patch("/article/{id}/edit", article.getId())
+                        .param("title", "EditedTitle")
+                        .param("content", "qwertyuiopasdfghjklzxcvbnm300")
+                        .param("professionalField", "PSYCHOLOGY")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/article/" + article.getId()));
+
     }
 
 
 
-    private Picture initPicture(){
-        Picture picture = new Picture();
-        picture = new Picture();
-        picture.setTitle("No profile picture");
-        picture.setUrl("images/defalt-user");
-        picture.setPublicId("");
-        pictureRepository.save(picture);
-        return picture;
-    }
-
-    private Meeting initMeeting(){
-        meeting = new Meeting();
-        meeting.setTopic("Meeting");
-        meeting.setStart(LocalDateTime.of(2023, 12, 12, 8, 0, 0));
-        meeting.setEnd(LocalDateTime.of(2023, 12, 12, 9, 0, 0));
-        meeting.setType(MeetingType.ONLINE);
-        meeting.setCreator(user);
-
-        meetingRepository.save(meeting);
-        return meeting;
-
-    }
 
 
 }

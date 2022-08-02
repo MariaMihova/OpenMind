@@ -16,7 +16,7 @@
 
     <form
             th:action="@{/article/{id}/edit(id=${article.getId()})}"
-            th:method="patch"
+            th:method="PATCH"
             th:object="${article}"
             class="modal__form container">
 

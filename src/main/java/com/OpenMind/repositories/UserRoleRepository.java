@@ -8,4 +8,7 @@ import java.util.Set;
 
 public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
     Set<UserRole> findAllByRole(Role role);
+
+    Set<UserRole> findTopByRole(Role userRole);
+
 }
