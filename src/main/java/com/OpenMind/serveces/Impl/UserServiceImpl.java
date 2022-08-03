@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
         UserEntity user = modelMapper.map(registerServiceModel, UserEntity.class);
         user.setProfessionalField(professionalFieldService.findByFieldName(FieldName.valueOf(registerServiceModel.getProfessionalField())));
         user.setPassword(passwordEncoder.encode(registerServiceModel.getRowPassword()));
+        user.setRegisteredAt(LocalDate.now());
         user.setAuthorities(userRoleService.getRole(userRepository.count() > 0 ? Role.USER : Role.ADMIN));
 
         try {

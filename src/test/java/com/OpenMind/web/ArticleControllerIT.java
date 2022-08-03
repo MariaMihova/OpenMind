@@ -50,8 +50,6 @@ public class ArticleControllerIT {
     @Autowired
     private MeetingRepository meetingRepository;
 
-//    @Autowired
-//    private WebApplicationContext webApplicationContext;
 
     private static final String USERNAME = "TestUser";
     private static final String PASSWORD = "TestPassword";
@@ -59,7 +57,13 @@ public class ArticleControllerIT {
     private ProfessionalField field;
     private Contacts contacts;
     private  Article article;
-    private Meeting meeting;
+    private static final String ARTICLE_CONTENT = "The following readers’ answers to this central philosophical question" +
+            " each win a random book." +
+            "What’s the problem? Isn’t it enough that things are as they are? No, because we are sometimes deceived. " +
+            "We need to tell the difference between hard ground and marsh that only looks hard. We need to know whether " +
+            "something is a bear or only a child with a bearskin rug over its head. We have evolved to tell the real " +
+            "from the false. Injure the brain and the victim may lose their sense of reality. When you have flu the " +
+            "familiar world can seem unreal. You might as well ask “What is the nature of ‘upright’?”";
 
     @BeforeEach
     public void setUp() {
@@ -95,7 +99,7 @@ public class ArticleControllerIT {
 
         article = new Article();
         article.setTitle("ArticleTitle");
-        article.setContent("qwertyuiopasdfghjklzxcvbnm");
+        article.setContent(ARTICLE_CONTENT);
         article.setCreated(LocalDate.now());
         article.setProfessionalField(field);
         article.setUser(user);
@@ -135,7 +139,7 @@ public class ArticleControllerIT {
 
         mockMvc.perform(post("/add-article")
                         .param("title", "NerdyArticleTitle")
-                        .param("content", "qwertyuiopasdfghjklzxcvbnm200")
+                        .param("content", ARTICLE_CONTENT)
                         .param("professionalField", "PSYCHOLOGY")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
@@ -190,7 +194,7 @@ public class ArticleControllerIT {
 
         mockMvc.perform(patch("/article/{id}/edit", article.getId())
                         .param("title", "EditedTitle")
-                        .param("content", "qwertyuiopasdfghjklzxcvbnm300")
+                        .param("content", ARTICLE_CONTENT)
                         .param("professionalField", "PSYCHOLOGY")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())

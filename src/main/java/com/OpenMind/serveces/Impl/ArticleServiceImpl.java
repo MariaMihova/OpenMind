@@ -104,7 +104,7 @@ public class ArticleServiceImpl implements ArticleService {
         articles.forEach(a -> {
             ArticleVewModel view = new ArticleVewModel();
             modelMapper.map(a, view);
-            view.setSummery(a.getContent().substring(0, 20));
+            view.setSummery(a.getContent().substring(0, 200) + "...");
             view.setUsername(a.getUser().getUsername());
             viewArticles.add(view);
         });

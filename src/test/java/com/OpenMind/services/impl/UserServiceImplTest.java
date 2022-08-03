@@ -21,6 +21,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,7 @@ public class UserServiceImplTest {
         testUserEntity.setPassword("TestPassword");
         testUserEntity.setFirstName("TestFirstName");
         testUserEntity.setLastName("TestLastName");
+        testUserEntity.setRegisteredAt(LocalDate.now());
         testUserEntity.setAuthorities(Set.of(new UserRole(Role.USER),
                 new UserRole(Role.ADMIN)));
 
@@ -118,7 +120,9 @@ public class UserServiceImplTest {
                         testUserEntity.getId(),
                         testUserEntity.getFirstName(),
                         testUserEntity.getLastName(),
-                        testUserEntity.getUsername()));
+                        testUserEntity.getUsername(),
+                        testUserEntity.getRegisteredAt(),
+                        testUserEntity.getProfessionalField()));
 
         UserViewModel actualView = toTest.findById(testUserEntity.getId());
 
@@ -153,7 +157,9 @@ public class UserServiceImplTest {
                         testUserEntity.getId(),
                         testUserEntity.getFirstName(),
                         testUserEntity.getLastName(),
-                        testUserEntity.getUsername()));
+                        testUserEntity.getUsername(),
+                        testUserEntity.getRegisteredAt(),
+                        testUserEntity.getProfessionalField()));
 
         List<UserViewModel> actualList = toTest.getAllByRole(Role.ADMIN);
 

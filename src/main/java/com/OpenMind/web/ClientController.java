@@ -48,7 +48,7 @@ public class ClientController {
             return "redirect:add-client";
         }
 
-        return "redirect:/profile#clients";
+        return "redirect:/profile";
     }
 
 

@@ -26,7 +26,7 @@ public class Article extends BaseEntity {
     }
 
     @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10000)
     public String getContent() {
         return content;
     }

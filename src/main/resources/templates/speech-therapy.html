@@ -47,28 +47,25 @@
     <div class="header__title ">
       <img
 
-              src="images/digital-lazy.jpg"
+              th:src="${s.getPicture().getUrl()}" th:alt="${s.getPicture().getTitle()}"
               data-src="images/digital.jpg"
               alt="Computer"
-              class="features__img lazy-img col-lg. m-4 "
+              class="features__img col-lg. m-4 "
       />
-      <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
+
       <div class="features__feature col-lg. m-8 ">
-        <h5 th:text="${s.getFullName()}" class="features__header highlight">Две Имена на рандъм Специалист</h5>
+        <h5  th:text="${s.getFullName()}" class="features__header highlight">Две Имена на рандъм Специалист</h5>
         <p>
-          <b> Образование и професионален опит</b> Lorem ipsum
-          dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
+          <b th:text="${s.getFullName()}"> Образование и професионален опит</b> is
+          Open mind member since <span th:text="${s.getRegisteredAt()}"></span> at the professional field
+          of <span th:text="${s.getProfessionalField().getFieldName().name()}"></span> .
         </p>
         <a class="btn btn-warning btn-lg" id="btn-details" th:href="@{/profile-details/{id}(id=${s.getId()})}">Details</a>
       </div>
     </div>
+
+  </div>
+</div>
 
   </div>
 </div>

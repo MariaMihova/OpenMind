@@ -2,6 +2,7 @@ package com.OpenMind.models.entitis;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,7 @@ public  class UserEntity extends BaseEntity {
     private String password;
     private String firstName;
     private String lastName;
+    private LocalDate registeredAt;
     private Set<UserRole> authorities;
     private ProfessionalField professionalField;
     private Set<Client> clients;
@@ -20,7 +22,7 @@ public  class UserEntity extends BaseEntity {
 
     public UserEntity(){}
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -29,7 +31,7 @@ public  class UserEntity extends BaseEntity {
         this.username = username;
     }
 
-    @Column
+    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -53,6 +55,15 @@ public  class UserEntity extends BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Column(nullable = false)
+    public LocalDate getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(LocalDate registeredAt) {
+        this.registeredAt = registeredAt;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)

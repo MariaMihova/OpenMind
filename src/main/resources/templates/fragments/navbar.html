@@ -31,7 +31,7 @@
             <a sec:authorize="!isAuthenticated()" class="nav__link" th:href="@{/}">Home</a>
         </li>
         <li class="nav-item">
-            <a sec:authorize="isAuthenticated()" class="nav__link" th:href="@{/home}">Home</a>
+            <a  sec:authorize="isAuthenticated()" class="nav__link" th:href="@{/home}">Home</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item ">
             <a class="nav__link" th:href="@{/psychology}">Psychology</a>

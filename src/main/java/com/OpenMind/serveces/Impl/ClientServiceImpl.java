@@ -31,7 +31,6 @@ public class ClientServiceImpl implements ClientService {
     @Cacheable("clients")
     @Override
     public List<ClientViewModel> findClientsBySpecialist(String name) {
-        System.out.println("Cacheable was called");
         return clientRepository.findAllBySpecialist(name);
     }
 
@@ -48,14 +47,8 @@ public class ClientServiceImpl implements ClientService {
         }
 
         UserEntity user = userService.findByUsername(principal.getName());
-//        if(user == null){
-//            return false;
-//        }
-
         user.addClient(client);
-
         userService.updateUser(user);
-
 
         return true;
     }

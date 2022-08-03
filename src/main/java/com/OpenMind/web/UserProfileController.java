@@ -50,13 +50,11 @@ public class UserProfileController {
         pictureViewModel.setEdit(!pictureViewModel.getTitle().equalsIgnoreCase("No profile picture"));
         ContactViewModel contactViewModel = contactsService.findContactByUserName(principal.getName());
 
-//        modelAndView.addObject("principal", principal);
         modelAndView.addObject("userArticles", userArticles);
         modelAndView.addObject("clients", clients);
         modelAndView.addObject("meetings", meetings);
         modelAndView.addObject("pictureViewModel", pictureViewModel);
         modelAndView.addObject("contactViewModel", contactViewModel);
-
 
 
         modelAndView.setViewName("profile");
@@ -74,7 +72,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile-details/{id}")
-    public ModelAndView profileDetailsPage(@PathVariable("id") long id, HttpSession httpSession, ModelAndView modelAndView, Principal principal) {
+    public ModelAndView profileDetailsPage(@PathVariable("id") long id, ModelAndView modelAndView, Principal principal) {
 
        UserViewModel userViewDetails = userService.findById(id);
        List<ArticleVewModel> userArticles = articleService.findArticlesByUser(userService.findById(id).getUsername());
