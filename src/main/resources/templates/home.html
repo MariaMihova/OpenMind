@@ -33,7 +33,7 @@
                 >
             </li>
             <li class="nav__item col-xs. m-3">
-                <a class="nav__link" href="#section--2">Latest additions</a>
+                <a class="nav__link" href="#meetings">Upcoming meetings</a>
             </li>
         </ul>
     </nav>
@@ -63,6 +63,38 @@
             </p>
         </div>
     </div>
+</div>
+
+<div class="section container" id="meetings">
+
+    <div class="row">
+        <div class="operations__icon operations__icon--1">
+                <img src="images/teamIcon.png" class="features__icon" alt="upload">
+        </div>
+        <h5 class="operations__header col-lg. m-4 col-sx. m-4">Upcoming meetings</h5>
+    </div>
+
+    <table class="table" style="font-size: 1.8rem;">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Topic</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Type</th>
+        </tr>
+        </thead>
+        <tbody id="meeting" th:each="m : ${meetings}">
+        <tr>
+            <th scope="row" th:value="${m.getId()}" th:text="${m.getId()}">id</th>
+            <td th:value="${m.getTopic()}" th:text="${m.getTopic()}">topic</td>
+            <!--            todo fix date display(the T)-->
+            <td th:value="${m.getStart()}" th:text="${m.getStart()}">start</td>
+            <td th:value="${m.getEnd()}" th:text="${m.getEnd()}">end</td>
+            <td th:value="${m.getType().name()}" th:text="${m.getType().name()}">type</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

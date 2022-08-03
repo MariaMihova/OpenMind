@@ -11,4 +11,6 @@ public interface MeetingService {
 
     List<MeetingViewModel> findMeetingsByUsername(String name);
 
+    List<MeetingViewModel> getTop5Meetings();
+
 }

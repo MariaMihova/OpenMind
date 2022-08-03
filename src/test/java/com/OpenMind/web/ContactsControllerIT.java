@@ -6,6 +6,7 @@ import com.OpenMind.models.entitis.UserRole;
 import com.OpenMind.models.enums.FieldName;
 import com.OpenMind.models.enums.Role;
 import com.OpenMind.repositories.*;
+import com.OpenMind.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,59 +31,27 @@ public class ContactsControllerIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private ContactsRepository contactsRepository;
+    private TestUtils testUtils;
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserEntity testUser;
 
-    @Autowired
-    private ProfessionalFieldRepository professionalFieldRepository;
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-
-    private static final String USERNAME = "TestUser";
-    private static final String PASSWORD = "TestPassword";
-    private UserEntity user;
-    private ProfessionalField field;
 
 
     @BeforeEach
     public void setUp() {
+        testUser = testUtils.testUserUser("TestUser");
 
-        user = new UserEntity();
-
-
-        UserRole userRole = new UserRole(Role.ADMIN);
-        userRoleRepository.save(userRole);
-
-        field = new ProfessionalField();
-        field.setFieldName(FieldName.PSYCHOLOGY);
-        field.setDescription("Description for field PSYCHOLOGY");
-        professionalFieldRepository.save(field);
-
-        user.setUsername(USERNAME);
-        user.setPassword(PASSWORD);
-        user.setFirstName("Tset");
-        user.setLastName("Testov");
-        user.setAuthorities(Set.of(userRole));
-        user.setProfessionalField(field);
-        userRepository.save(user);
 
     }
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
-        contactsRepository.deleteAll();
-        userRoleRepository.deleteAll();
-        professionalFieldRepository.deleteAll();
-
-
+        testUtils.clearDB();
     }
 
     @Test
-    @WithMockUser(username = "testUser", roles = {"ADMIN"})
+    @WithMockUser("TestUser")
     void addContactsPage() throws Exception {
 
         mockMvc.perform(get("/add-contacts"))
@@ -91,7 +60,7 @@ public class ContactsControllerIT {
     }
 
     @Test
-    @WithMockUser(username = USERNAME)
+    @WithMockUser("TestUser")
     void addContactsMethod() throws Exception {
 
         mockMvc.perform(post("/add-contacts")

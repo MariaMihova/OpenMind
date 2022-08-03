@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MeetingServiceImpl implements MeetingService {
@@ -48,5 +49,14 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     public List<MeetingViewModel> findMeetingsByUsername(String name) {
         return meetingRepository.findAllByUsername(name);
+    }
+
+    @Override
+    public List<MeetingViewModel> getTop5Meetings() {
+        List<Meeting> meetings = meetingRepository.findTop5ByOrderByStart();
+
+        return meetings.stream()
+                .map(m -> modelMapper.map(m, MeetingViewModel.class))
+                .collect(Collectors.toList());
     }
 }

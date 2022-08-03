@@ -11,6 +11,7 @@ import com.OpenMind.repositories.ClientRepository;
 import com.OpenMind.repositories.ProfessionalFieldRepository;
 import com.OpenMind.repositories.UserRepository;
 import com.OpenMind.repositories.UserRoleRepository;
+import com.OpenMind.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,59 +35,24 @@ public class ClientControllerIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private TestUtils testUtils;
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserEntity testUser;
 
-    @Autowired
-    private ProfessionalFieldRepository professionalFieldRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-
-    private static final String USERNAME = "TestUser";
-    private static final String PASSWORD = "TestPassword";
-    private UserEntity user;
-    private ProfessionalField field;
 
 
     @BeforeEach
     public void setUp() {
-
-        user = new UserEntity();
-
-
-        UserRole userRole = new UserRole(Role.ADMIN);
-        userRoleRepository.save(userRole);
-
-        field = new ProfessionalField();
-        field.setFieldName(FieldName.PSYCHOLOGY);
-        field.setDescription("Description for field PSYCHOLOGY");
-        professionalFieldRepository.save(field);
-
-        user.setUsername(USERNAME);
-        user.setPassword(PASSWORD);
-        user.setFirstName("Tset");
-        user.setLastName("Testov");
-        user.setAuthorities(Set.of(userRole));
-        user.setProfessionalField(field);
-        userRepository.save(user);
-
+        testUser = testUtils.testUserUser("TestUser");
     }
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
-        clientRepository.deleteAll();
-        userRoleRepository.deleteAll();
-        professionalFieldRepository.deleteAll();
-
-
+       testUtils.clearDB();
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser("TestUser")
     void addClientPageTest() throws Exception {
 
         mockMvc.perform(get("/add-client"))
@@ -96,7 +62,7 @@ public class ClientControllerIT {
     }
 
     @Test
-    @WithMockUser(username = USERNAME)
+    @WithMockUser("TestUser")
     void addClientMethod() throws Exception {
 
         mockMvc.perform(post("/add-client")
@@ -106,24 +72,9 @@ public class ClientControllerIT {
                         .param("gender", "MAN")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/profile#clients"));
+                .andExpect(redirectedUrl("/profile"));
 
 
     }
 
-
-
-
-    private Client initArticle(){
-
-        Client client = new Client();
-        client.setInitials("A.J.");
-        client.setInitialRequest("the clients initial request");
-        client.setAge(20);
-        client.setGender(Gender.MAN);
-
-        clientRepository.save(client);
-        return client;
-
-    }
 }

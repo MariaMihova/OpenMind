@@ -98,7 +98,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleVewModel> getLatest() {
-        List<Article> articles = articleRepository.findTop5ByOrderByCreated();
+        List<Article> articles = articleRepository.findTop5ByOrderByCreatedDescTitle();
         List<ArticleVewModel> viewArticles = new ArrayList<>();
 
         articles.forEach(a -> {

@@ -19,7 +19,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<ArticleVewModel> findAllByProfessionalFieldId(@Param(value = "id") Long id);
 
 //    @Query("select new com.OpenMind.models.viewModels.ArticleVewModel( a.id, a.title, substring(a.content,1, 200), u.username) from Article a join a.user u order by a.created")
-    List<Article> findTop5ByOrderByCreated();
+    List<Article> findTop5ByOrderByCreatedDescTitle();
 
 
 

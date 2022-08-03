@@ -1,10 +1,12 @@
 package com.OpenMind.serveces.Impl;
 
 import com.OpenMind.models.bindingModels.AuthoritiesModel;
+import com.OpenMind.models.entitis.Picture;
 import com.OpenMind.models.entitis.UserEntity;
 import com.OpenMind.models.enums.FieldName;
 import com.OpenMind.models.enums.Role;
 import com.OpenMind.models.serviceModels.RegisterServiceModel;
+import com.OpenMind.models.viewModels.PictureViewModel;
 import com.OpenMind.models.viewModels.UserViewModel;
 import com.OpenMind.repositories.UserRepository;
 import com.OpenMind.serveces.UserRoleService;
@@ -85,10 +87,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserViewModel> findAllByProfessionalField(Long id) {
-        return userRepository.findAllByProfessionalFieldId(id)
-                .stream()
+
+        List<UserViewModel> users = userRepository.findAllByProfessionalFieldId(id).stream()
                 .map(user -> modelMapper.map(user, UserViewModel.class))
                 .collect(Collectors.toList());
+
+        users.forEach( u -> {
+            if(u.getPicture() == null){
+               PictureViewModel picture = new PictureViewModel();
+                picture.setTitle("No profile picture");
+                picture.setUrl("images/defalt-user");
+                u.setPicture(picture);
+            }
+        });
+        return users;
+
 
     }
 

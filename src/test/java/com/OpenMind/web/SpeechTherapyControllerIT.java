@@ -10,6 +10,7 @@ import com.OpenMind.repositories.ArticleRepository;
 import com.OpenMind.repositories.ProfessionalFieldRepository;
 import com.OpenMind.repositories.UserRepository;
 import com.OpenMind.repositories.UserRoleRepository;
+import com.OpenMind.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,55 +34,26 @@ public class SpeechTherapyControllerIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private ArticleRepository articleRepository;
+    private TestUtils testUtils;
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserEntity testUser;
 
-    @Autowired
-    private ProfessionalFieldRepository professionalFieldRepository;
+    //todo articles
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-
-    private static final String USERNAME = "TestUser";
-    private static final String PASSWORD = "TestPassword";
-    private UserEntity user;
-    private ProfessionalField field;
 
     @BeforeEach
     public void setUp() {
-
-        user = new UserEntity();
-
-        UserRole userRole = new UserRole(Role.ADMIN);
-        userRoleRepository.save(userRole);
-
-        field = new ProfessionalField();
-        field.setFieldName(FieldName.SPEECH_THERAPY);
-        field.setDescription("Description for field PSYCHOLOGY");
-        professionalFieldRepository.save(field);
-
-        user.setUsername(USERNAME);
-        user.setPassword(PASSWORD);
-        user.setFirstName("Tset");
-        user.setLastName("Testov");
-        user.setAuthorities(Set.of(userRole));
-        user.setProfessionalField(field);
-        userRepository.save(user);
+        testUser = testUtils.testUserUser("TestUser");
 
     }
 
     @AfterEach
     void tearDown() {
-        articleRepository.deleteAll();
-        userRepository.deleteAll();
-        userRoleRepository.deleteAll();
-        professionalFieldRepository.deleteAll();
+        testUtils.clearDB();
     }
 
     @Test
-    @WithMockUser()
+    @WithMockUser("TestUser")
     void speechTherapyPage() throws Exception {
         mockMvc.perform(get("/speech-therapy"))
                 .andExpect(status().isOk())
@@ -90,21 +62,6 @@ public class SpeechTherapyControllerIT {
                 .andExpect(view().name("/speech-therapy"));
 
 
-    }
-
-
-
-    private Article initArticle(){
-
-        Article article = new Article();
-        article.setTitle("ArticleTitle");
-        article.setContent("qwertyuiopasdfghjklzxcvbnm");
-        article.setCreated(LocalDate.now());
-        article.setProfessionalField(field);
-        article.setUser(user);
-
-        articleRepository.save(article);
-        return article;
     }
 
 

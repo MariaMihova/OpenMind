@@ -28,7 +28,7 @@ public class ClientServiceImpl implements ClientService {
         this.userService = userService;
     }
 
-    @Cacheable("clients")
+
     @Override
     public List<ClientViewModel> findClientsBySpecialist(String name) {
         return clientRepository.findAllBySpecialist(name);
