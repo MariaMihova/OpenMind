@@ -1,12 +1,14 @@
 package com.OpenMind.config;
 
 import com.OpenMind.serveces.ArticleService;
+import com.OpenMind.serveces.UserService;
 import com.cloudinary.Cloudinary;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 

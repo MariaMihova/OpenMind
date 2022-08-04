@@ -1,8 +1,10 @@
 package com.OpenMind.serveces.Impl;
 
 import com.OpenMind.models.bindingModels.AuthoritiesModel;
+import com.OpenMind.models.entitis.Article;
 import com.OpenMind.models.entitis.Picture;
 import com.OpenMind.models.entitis.UserEntity;
+import com.OpenMind.models.entitis.UserRole;
 import com.OpenMind.models.enums.FieldName;
 import com.OpenMind.models.enums.Role;
 import com.OpenMind.models.serviceModels.RegisterServiceModel;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -134,6 +138,8 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         }
     }
+
+
 
 
 }

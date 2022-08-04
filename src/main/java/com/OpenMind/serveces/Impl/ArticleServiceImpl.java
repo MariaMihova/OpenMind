@@ -127,7 +127,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private boolean isAdmin(UserEntity user) {
-//
+
         if(user == null){
             return false;
         }

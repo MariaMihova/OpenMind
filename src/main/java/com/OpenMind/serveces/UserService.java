@@ -27,4 +27,7 @@ public interface UserService  {
     void setAuthorities(AuthoritiesModel authoritiesModel);
 
 
+
+
+
 }

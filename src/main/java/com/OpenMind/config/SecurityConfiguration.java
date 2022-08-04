@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/", "/login", "/registration").permitAll()
                 .antMatchers("/admin").hasRole(Role.ADMIN.name())
+                .antMatchers("/set-authorities").hasRole(Role.ADMIN.name())
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()

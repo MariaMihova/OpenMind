@@ -29,4 +29,5 @@ public class OpenMindMethodSecurityExpressionHandler extends DefaultMethodSecuri
 
         return root;
     }
+
 }
