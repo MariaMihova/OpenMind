@@ -123,6 +123,7 @@ img {
   width: 100%;
   padding: 0 6rem;
   z-index: 100;
+  position: relative
 }
 
 /* nav and stickly class at the same time */
@@ -140,7 +141,14 @@ img {
   display: flex;
   align-items: center;
   list-style: none;
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%)
 }
+
 
 .nav-item {
   margin-left: 4rem;
@@ -807,7 +815,16 @@ ul {
 .address{
 font-size: 2rem;}
 
-.bg-img{
-background-image: url('images/socio4.png');
+
+#dropdownMenuButton{
+border: none;
+  text-decoration:none;
+  color:black;
+  background-color: #8be866;
+  border-radius: 40%;
+  font-size: 1.8rem;
 }
+
+
+
 

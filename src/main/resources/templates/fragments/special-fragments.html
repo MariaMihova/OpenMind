@@ -17,26 +17,40 @@
 <body >
 <header class="header">
     <nav th:fragment="navbar" class="navbar">
-        <!--            todo make logo link to home-->
-        <img
-                src="/images/logo.png"
-                alt="Psycho logo"
-                class="nav__logo "
-                id="logo"
-                data-version-number="3.0"
-        />
         <ul class="nav__links">
             <li class="nav-item">
-                <a class="nav__link" th:href="@{/home}">Home</a>
+                <a th:href="@{/home}">
+                    <img
+                            src="/images/logo.png"
+                            alt="Psycho logo"
+                            class="nav__logo "
+                            id="logo"
+                            data-version-number="3.0"
+                    />
+                </a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item ">
-                <a class="nav__link" th:href="@{/psychology}">Psychology</a>
+            <li class="nav-item">
+                <a sec:authorize="!isAuthenticated()" class="nav__link" th:href="@{/}">Home</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
-                <a class="nav__link" th:href="@{/social-work}">Social Work</a>
+            <li class="nav-item">
+                <a  sec:authorize="isAuthenticated()" class="nav__link" th:href="@{/home}">Home</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
-                <a class="nav__link" th:href="@{/speech-therapy}">Speech Therapy</a>
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <button class="btn btn-success btn-lg dropdown-toggle" style="font-size:1.7rem;" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Fields
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="border: none; align-items: center;">
+                    <a class="nav__link" th:href="@{/psychology}">Psychology</a>
+                    <a class="nav__link" th:href="@{/social-work}">Social Work</a>
+                    <a class="nav__link" th:href="@{/speech-therapy}">Speech Therapy</a>
+                </div>
+            </li>
+            <!--        <li sec:authorize="isAuthenticated()" class="nav-item">-->
+            <!--            <a class="nav__link" th:href="@{/social-work}">Social Work</a>-->
+            <!--        </li>-->
+            <!--        <li sec:authorize="isAuthenticated()" class="nav-item">-->
+            <!--            <a class="nav__link" th:href="@{/speech-therapy}">Speech Therapy</a>-->
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
                 <a class="nav__link" th:href="@{/profile}">Your Profile</a>
@@ -46,7 +60,7 @@
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item" >
                 <form class="nav__link" th:method="post" th:action="@{/logout}">
-                    <input class="btn btn-success btn-lg" id="article-btn"  type="submit" th:value="Logout" style="font-size:1.7rem;"></input>
+                    <input class="btn btn-success btn-lg" id="article-btn"  type="submit" th:value="Logout" style="font-size:1.7rem;">
                 </form>
 
             </li>
@@ -55,7 +69,7 @@
             </li>
         </ul>
     </nav>
-    <!--</div>-->
+
 </header>
 <footer th:fragment="footer" class="footer">
     <ul class="footer__nav">

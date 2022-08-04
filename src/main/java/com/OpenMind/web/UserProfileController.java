@@ -82,7 +82,9 @@ public class UserProfileController {
         if(userViewDetails != null){
             if(userViewDetails.getUsername().equalsIgnoreCase(principal.getName())){
 
-                return this.profilePage(modelAndView, principal);
+                modelAndView = this.profilePage(modelAndView, principal);
+                modelAndView.setViewName("redirect:/profile");
+                return modelAndView;
             }
             modelAndView.addObject("userViewDetails", userViewDetails);
             modelAndView.addObject("userArticles", userArticles);
