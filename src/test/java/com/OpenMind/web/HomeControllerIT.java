@@ -64,12 +64,19 @@ public class HomeControllerIT {
 
     @Test
     @WithMockUser("TestUser")
-    void testHomePage() throws Exception {
+    void testHomePageLoggedUser() throws Exception {
         mockMvc.perform(get("/home"))
                 .andExpect(model().attributeExists("articles"))
                 .andExpect(model().attributeExists("meetings"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"));
+    }
+
+    @Test
+    void testHomePageNotLoggedUser() throws Exception {
+        mockMvc.perform(get("/home"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
 
