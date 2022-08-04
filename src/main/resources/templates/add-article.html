@@ -43,7 +43,7 @@
             <select  th:field="*{professionalField}"  th:errorclass="bg-danger" id="field" name="professionalField" class="custom-select col-lg. m-6" style="height: 50px"
                      aria-describedby="categoryHelpInline">
                 <option value="" selected>Professional field</option>
-                <option th:each="c : ${T(com.OpenMind.models.enums.FieldName).values()}" th:value="${c}" th:text="${c}"></option>
+                <option th:each="c : ${T(com.OpenMind.models.enums.FieldName).values()}" th:value="${c}" th:text="${c.toString()}"></option>
             </select>
             <th:block class="row" th:if="${#fields.hasErrors('professionalField')}" >
                 <label class="col-lg. m-1" for="professionalField-error"></label>

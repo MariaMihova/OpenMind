@@ -91,7 +91,7 @@
             <!--            todo fix date display(the T)-->
             <td th:value="${m.getStart()}" th:text="${m.getStart()}">start</td>
             <td th:value="${m.getEnd()}" th:text="${m.getEnd()}">end</td>
-            <td th:value="${m.getType().name()}" th:text="${m.getType().name()}">type</td>
+            <td th:value="${m.getType().toString()}" th:text="${m.getType().toString()}">type</td>
         </tr>
         </tbody>
     </table>

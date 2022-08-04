@@ -1,5 +1,6 @@
 package com.OpenMind.config;
 
+import com.OpenMind.models.enums.FieldName;
 import com.OpenMind.serveces.ArticleService;
 import com.OpenMind.serveces.UserService;
 import com.cloudinary.Cloudinary;
@@ -38,6 +39,7 @@ public class ApplicationBeenConfiguration {
                                 DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
             }
         });
+
         return modelMapper;
     }
 

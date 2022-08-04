@@ -51,7 +51,7 @@
             <select  th:field="*{type}"  th:errorclass="bg-danger" id="type" name="type" class="custom-select col-lg. m-6" style="height: 50px"
                      aria-describedby="categoryHelpInline">
                 <option value="">Type of the meeting</option>
-                <option th:each="t : ${T(com.OpenMind.models.enums.MeetingType).values()}" th:value="${t}" th:text="${t}"></option>
+                <option th:each="t : ${T(com.OpenMind.models.enums.MeetingType).values()}" th:value="${t}" th:text="${t.toString}"></option>
             </select>
             <th:block class="row" th:if="${#fields.hasErrors('type')}" >
                 <label class="col-lg. m-1" for="type-error"></label>

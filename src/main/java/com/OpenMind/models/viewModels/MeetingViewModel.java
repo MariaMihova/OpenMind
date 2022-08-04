@@ -2,6 +2,7 @@ package com.OpenMind.models.viewModels;
 
 import com.OpenMind.models.entitis.Meeting;
 import com.OpenMind.models.enums.MeetingType;
+import org.aspectj.lang.annotation.After;
 
 import java.time.LocalDateTime;
 
@@ -39,11 +40,14 @@ public class MeetingViewModel {
         this.topic = topic;
     }
 
+
     public LocalDateTime getStart() {
         return start;
     }
 
     public void setStart(LocalDateTime start) {
+
+
         this.start = start;
     }
 
@@ -51,6 +55,7 @@ public class MeetingViewModel {
         return end;
     }
 
+    
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
