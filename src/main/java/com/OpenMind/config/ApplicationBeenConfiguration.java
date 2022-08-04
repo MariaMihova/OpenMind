@@ -31,12 +31,18 @@ public class ApplicationBeenConfiguration {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        modelMapper.addConverter(new Converter<String, LocalDateTime>() {
+//        modelMapper.addConverter(new Converter<String, LocalDateTime>() {
+//            @Override
+//            public LocalDateTime convert(MappingContext<String, LocalDateTime> mappingContext) {
+//                return LocalDateTime
+//                        .parse(mappingContext.getSource(),
+//                                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+//            }
+//        });
+        modelMapper.addConverter(new Converter<LocalDateTime, String>() {
             @Override
-            public LocalDateTime convert(MappingContext<String, LocalDateTime> mappingContext) {
-                return LocalDateTime
-                        .parse(mappingContext.getSource(),
-                                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+            public String convert(MappingContext<LocalDateTime, String> mappingContext) {
+                return String.format("%s",(mappingContext.getSource())).replaceAll("T", " ");
             }
         });
 

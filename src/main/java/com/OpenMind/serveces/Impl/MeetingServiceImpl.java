@@ -48,7 +48,12 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     public List<MeetingViewModel> findMeetingsByUsername(String name) {
-        return meetingRepository.findAllByUsername(name);
+        List<Meeting> meetings = meetingRepository.findAllByCreatorUsername(name);
+        return meetings
+                .stream()
+                .map(m -> modelMapper
+                        .map(m, MeetingViewModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserProfileController {
@@ -49,6 +50,7 @@ public class UserProfileController {
         PictureViewModel pictureViewModel = pictureService.getProfilePicture(principal.getName());
         pictureViewModel.setEdit(!pictureViewModel.getTitle().equalsIgnoreCase("No profile picture"));
         ContactViewModel contactViewModel = contactsService.findContactByUserName(principal.getName());
+
 
         modelAndView.addObject("userArticles", userArticles);
         modelAndView.addObject("clients", clients);

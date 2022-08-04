@@ -4,6 +4,7 @@ import com.OpenMind.models.enums.MeetingType;
 import com.OpenMind.utils.ValidateString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -41,7 +42,7 @@ public class MeetingBindingModel {
     }
 
     @NotNull
-    @Future
+    @Future()
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     public LocalDateTime getEnd() {
         return end;
@@ -59,5 +60,11 @@ public class MeetingBindingModel {
 
     public void setType(MeetingType type) {
         this.type = type;
+    }
+
+    @AssertTrue(message = "Field `end` should be later than `start`")
+    // Other rules can also be validated in other methods
+    private boolean isEndAfterStart() {
+        return start.isBefore(end);
     }
 }

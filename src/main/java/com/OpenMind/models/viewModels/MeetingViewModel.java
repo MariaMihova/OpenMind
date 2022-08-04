@@ -10,13 +10,13 @@ public class MeetingViewModel {
 
     private Long id;
     private String topic;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private String start;
+    private String end;
     private MeetingType type;
 
     public MeetingViewModel(){}
 
-    public MeetingViewModel(Long id, String topic, LocalDateTime start, LocalDateTime end, MeetingType type) {
+    public MeetingViewModel(Long id, String topic, String start, String end, MeetingType type) {
         this.id = id;
         this.topic = topic;
         this.start = start;
@@ -41,22 +41,22 @@ public class MeetingViewModel {
     }
 
 
-    public LocalDateTime getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(String start) {
 
 
         this.start = start;
     }
 
-    public LocalDateTime getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    
-    public void setEnd(LocalDateTime end) {
+
+    public void setEnd(String end) {
         this.end = end;
     }
 
