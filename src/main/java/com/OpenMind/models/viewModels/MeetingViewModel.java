@@ -12,11 +12,11 @@ public class MeetingViewModel {
     private String topic;
     private String start;
     private String end;
-    private MeetingType type;
+    private String type;
 
     public MeetingViewModel(){}
 
-    public MeetingViewModel(Long id, String topic, String start, String end, MeetingType type) {
+    public MeetingViewModel(Long id, String topic, String start, String end, String type) {
         this.id = id;
         this.topic = topic;
         this.start = start;
@@ -60,11 +60,11 @@ public class MeetingViewModel {
         this.end = end;
     }
 
-    public MeetingType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(MeetingType type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

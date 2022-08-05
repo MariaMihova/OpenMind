@@ -122,7 +122,7 @@ public class UserServiceImplTest {
                         testUserEntity.getLastName(),
                         testUserEntity.getUsername(),
                         testUserEntity.getRegisteredAt(),
-                        testUserEntity.getProfessionalField()));
+                        "Psychology"));
 
         UserViewModel actualView = toTest.findById(testUserEntity.getId());
 
@@ -159,7 +159,7 @@ public class UserServiceImplTest {
                         testUserEntity.getLastName(),
                         testUserEntity.getUsername(),
                         testUserEntity.getRegisteredAt(),
-                        testUserEntity.getProfessionalField()));
+                        "Psychology"));
 
         List<UserViewModel> actualList = toTest.getAllByRole(Role.ADMIN);
 

@@ -58,7 +58,7 @@
         <p>
           <b th:text="${s.getFullName()}"> Образование и професионален опит</b> is
           Open mind member since <span th:text="${s.getRegisteredAt()}"></span> at the professional field
-          of <span th:text="${s.getProfessionalField().getFieldName().toString()}"></span> .
+          of <span th:text="${s.getProfessionalField()}"></span> .
         </p>
         <a class="btn btn-warning btn-lg" id="btn-details" th:href="@{/profile-details/{id}(id=${s.getId()})}">Details</a>
       </div>

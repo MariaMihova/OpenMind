@@ -1,20 +1,19 @@
 package com.OpenMind.config;
 
+import com.OpenMind.models.entitis.ProfessionalField;
 import com.OpenMind.models.enums.FieldName;
+import com.OpenMind.models.enums.MeetingType;
 import com.OpenMind.serveces.ArticleService;
-import com.OpenMind.serveces.UserService;
 import com.cloudinary.Cloudinary;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 @Configuration
@@ -43,6 +42,26 @@ public class ApplicationBeenConfiguration {
             @Override
             public String convert(MappingContext<LocalDateTime, String> mappingContext) {
                 return String.format("%s",(mappingContext.getSource())).replaceAll("T", " ");
+            }
+        });
+
+        modelMapper.addConverter(new Converter<MeetingType, String>() {
+            @Override
+            public String convert(MappingContext<MeetingType, String> mappingContext) {
+
+                return String.format("%s",(mappingContext.getSource().name())).charAt(0) +
+                 String.format("%s",(mappingContext.getSource().name())).substring(1).toLowerCase()
+                         .replaceAll("_", " ");
+            }
+        });
+
+        modelMapper.addConverter(new Converter<ProfessionalField, String>() {
+            @Override
+            public String convert(MappingContext<ProfessionalField, String> mappingContext) {
+
+                return String.format("%s",(mappingContext.getSource().getFieldName().name())).charAt(0) +
+                        String.format("%s",(mappingContext.getSource().getFieldName().name())).substring(1).toLowerCase()
+                                .replaceAll("_", " ");
             }
         });
 

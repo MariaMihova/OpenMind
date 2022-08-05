@@ -12,14 +12,14 @@ public class UserViewModel {
     private String lastName;
     private String username;
     private LocalDate registeredAt;
-    private ProfessionalField professionalField;
+    private String professionalField;
     private List<ArticleVewModel> articles;
     private PictureViewModel picture;
     private boolean isOwner;
 
     public UserViewModel(){}
 
-    public UserViewModel(Long id, String firstName, String lastName, String username, LocalDate registeredAt, ProfessionalField professionalField) {
+    public UserViewModel(Long id, String firstName, String lastName, String username, LocalDate registeredAt, String professionalField) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,11 +72,11 @@ public class UserViewModel {
         this.registeredAt = registeredAt;
     }
 
-    public ProfessionalField getProfessionalField() {
+    public String getProfessionalField() {
         return professionalField;
     }
 
-    public void setProfessionalField(ProfessionalField professionalField) {
+    public void setProfessionalField(String professionalField) {
         this.professionalField = professionalField;
     }
 
