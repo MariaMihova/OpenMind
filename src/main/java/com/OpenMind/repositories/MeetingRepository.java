@@ -13,7 +13,7 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
 
 
 //    @Query("select new com.OpenMind.models.viewModels.MeetingViewModel(m.id, m.topic, m.start, m.end, m.type) from Meeting m join m.creator c where c.username= :name")
-    List<Meeting> findAllByCreatorUsername(String name);
+    List<Meeting> findAllByCreatorUsernameOrderByStart(String name);
 
     List<Meeting> findTop5ByOrderByStart();
 
