@@ -20,7 +20,7 @@ public class RegisterBindingModel {
     public RegisterBindingModel(){}
 
     @NotNull(message = "Username can not be empty!")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "The size of the username must be between 2 and 20 symbols.")
     public String getUsername() {
         return username;
     }
@@ -30,7 +30,7 @@ public class RegisterBindingModel {
     }
 
     @NotNull(message = "Password can not be empty!")
-    @Size(min= 6)
+    @Size(min= 6, message = "The size of the password must be at least 6 symbols.")
     public String getRowPassword() {
         return rowPassword;
     }
@@ -40,7 +40,7 @@ public class RegisterBindingModel {
     }
 
     @NotBlank(message = "Password can not be empty!")
-    @Size(min= 6)
+    @Size(min= 6,message = "The size of the password must be at least 6 symbols.")
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -50,18 +50,17 @@ public class RegisterBindingModel {
     }
 
     @NotBlank(message = "First name can not be empty!")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "The size of the first name must be at least 6 symbols.")
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-//        System.out.println("Setter was called");
         this.firstName = firstName;
     }
 
     @NotBlank(message = "Last name can not be empty!")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "The size of the last name must be at least 6 symbols.")
     public String getLastName() {
         return lastName;
     }

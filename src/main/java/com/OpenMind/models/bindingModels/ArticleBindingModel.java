@@ -14,8 +14,8 @@ public class ArticleBindingModel {
 
     public ArticleBindingModel(){}
 
-    @NotNull
-    @Size(min = 3)
+    @NotNull(message = "Title can not be empty!")
+    @Size(min = 3, message = "The size of the title must be at last 3 symbols.")
     public String getTitle() {
         return title;
     }
@@ -24,8 +24,8 @@ public class ArticleBindingModel {
         this.title = title;
     }
 
-    @NotNull
-    @Size(min = 20)
+    @NotNull(message = "Content can not be empty!")
+    @Size(min = 200, message = "Content must be at last 200 characters.")
     public String getContent() {
         return content;
     }

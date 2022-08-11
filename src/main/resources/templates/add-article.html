@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head >
-    <div th:replace="/fragments/navbar :: head">Head</div>
+    <div th:replace="/fragments/special-fragments :: head">Head</div>
 </head>
 <body>
-<header class="header">
+<header class="header container">
     <div th:replace="/fragments/special-fragments :: navbar">Navbar</div>
 
     <h2 class="modal__header">
-        Add
-        <span class="highlight">new</span>
-        article
-    </h2>
+    Add
+    <span class="highlight">new</span>
+    article
+</h2>
     <form
             th:action="@{/add-article}"
             th:method="POST"

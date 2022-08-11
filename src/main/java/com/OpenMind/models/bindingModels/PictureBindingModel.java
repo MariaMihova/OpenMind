@@ -13,7 +13,7 @@ public class PictureBindingModel {
 
     public PictureBindingModel(){}
 
-    @NotBlank
+    @NotBlank(message = "Please, enter picture name!")
     public String getTitle() {
         return title;
     }

@@ -16,12 +16,13 @@ public class MeetingBindingModel {
     private LocalDateTime start;
     private LocalDateTime end;
     private MeetingType type;
+    private final boolean isEndValid = this.isEndAfterStart();
 
     public MeetingBindingModel(){}
 
 
     @NotNull
-    @Size(min= 2)
+    @Size(min= 2, message = "The topic of the meeting must be 2 or more symbols.")
     public String getTopic() {
         return topic;
     }
@@ -30,8 +31,8 @@ public class MeetingBindingModel {
         this.topic = topic;
     }
 
-    @NotNull
-    @Future()
+    @NotNull(message = "Place, select future date!")
+    @Future(message = "The start of the meeting can not be in the past.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     public LocalDateTime getStart() {
         return start;
@@ -41,8 +42,8 @@ public class MeetingBindingModel {
         this.start = start;
     }
 
-    @NotNull
-    @Future()
+    @NotNull(message = "Place, select future date!")
+    @Future(message = "The end of the meeting can not be in the past.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     public LocalDateTime getEnd() {
         return end;
@@ -52,7 +53,7 @@ public class MeetingBindingModel {
         this.end = end;
     }
 
-    @NotNull
+    @NotNull(message = "Please, select meeting type!")
     @ValidateString(acceptedValues = {"ONLINE", "IN_PERSON"})
     public MeetingType getType() {
         return type;
@@ -65,6 +66,7 @@ public class MeetingBindingModel {
     @AssertTrue(message = "Field `end` should be later than `start`")
     // Other rules can also be validated in other methods
     private boolean isEndAfterStart() {
+        if(this.start == null || this.end == null) return false;
         return start.isBefore(end);
     }
 }

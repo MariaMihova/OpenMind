@@ -61,11 +61,13 @@ public class AdminController {
 
         if(bindingResult.hasErrors()){
            redirectIfError(authoritiesModel, bindingResult, redirectAttributes);
+           return "redirect:admin#meetings";
         }
 
         if(!userService.existsByUsername(authoritiesModel.getUsername())){
             authoritiesModel.setDoseNotExist(true);
             redirectIfError(authoritiesModel, bindingResult, redirectAttributes);
+            return "redirect:admin#meetings";
            }
 
 

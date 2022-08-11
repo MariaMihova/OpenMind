@@ -16,8 +16,8 @@ public class ClientBindingModel {
 
     public ClientBindingModel(){}
 
-    @NotNull
-    @Size(min = 2, max = 3)
+    @NotNull(message = "Initials can not be empty!")
+    @Size(min = 2, max = 3, message = "The size of the initials must be between 2 and 3 characters")
     public String getInitials() {
         return initials;
     }
@@ -26,8 +26,8 @@ public class ClientBindingModel {
         this.initials = initials;
     }
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Age can not be empty!")
+    @Positive(message = "Age must be sa positive number.")
     public int getAge() {
         return age;
     }
@@ -46,8 +46,8 @@ public class ClientBindingModel {
         this.gender = gender;
     }
 
-    @NotNull
-    @Size(min = 20)
+    @NotNull(message = "Initial Request can not be empty1")
+    @Size(min = 20, message = "Initial Request must be at last 20 characters.")
     public String getInitialRequest() {
         return initialRequest;
     }

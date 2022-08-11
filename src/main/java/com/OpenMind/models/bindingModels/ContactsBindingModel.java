@@ -14,7 +14,7 @@ public class ContactsBindingModel {
     public ContactsBindingModel(){}
 
     @NotNull(message = "Country can not be empty!")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "The size of country name must be between 2 and 20 characters.")
     public String getCountry() {
         return country;
     }
@@ -24,7 +24,7 @@ public class ContactsBindingModel {
     }
 
     @NotNull(message = "City can not be empty!")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "The size of city name must be between 2 and 20 characters.")
     public String getCity() {
         return city;
     }

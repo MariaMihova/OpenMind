@@ -4,17 +4,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:>
 <head >
-    <div th:replace="/fragments/navbar :: head">Head</div>
+    <div th:replace="/fragments/special-fragments :: head">Head</div>
 </head>
-<body class="container">
-<header class="header">
-    <div th:replace="/fragments/navbar :: navbar">Navbar</div>
+<body >
+<header class="header container">
+    <div th:replace="/fragments/special-fragments :: navbar">Navbar</div>
+
 
 
     <h2 class="modal__header">
         Add
         <span class="highlight">new</span>
-        Picture
+        picture
     </h2>
     <form
             th:action="@{/edit-picture}"
@@ -48,90 +49,6 @@
 
         <button class="btn btn-success btn-lg" id="article-btn" type="submit">Add</button>
     </form>
-
-
-
-
-
-
-    <!-- <div class="modal hidden"> -->
-    <!--      <button class="btn&#45;&#45;close-modal">&times;</button>-->
-<!--    <h2 class="modal__header">-->
-<!--        Register in just<br />-->
-<!--        <span class="highlight">1 minute</span>-->
-<!--    </h2>-->
-<!--    &lt;!&ndash;    <th:block  th:if="${registrationError}" class="error">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <p id="registration-error">Wrong user or password</p></th:block>&ndash;&gt;-->
-<!--    <form-->
-<!--            th:action="@{/registration}"-->
-<!--            th:method="POST"-->
-<!--            th:object="${registerBindingModel}"-->
-<!--            class="modal__form container">-->
-
-<!--        &lt;!&ndash;todo fix the error css&ndash;&gt;-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="username">Username</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{username}" th:errorclass="is-valid" id="username" type="text"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('username')}" >-->
-<!--            <label class="col-lg. m-1" for="username-error"></label>-->
-<!--            <small class="col-lg. m-6" id="username-error" th:errors="*{username}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="rowPassword">Password</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{rowPassword}" th:errorclass="is-valid" id="rowPassword" type="password"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('rowPassword')}" >-->
-<!--            <label class="col-lg. m-1" for="rowPassword-error"></label>-->
-<!--            <small class="col-lg. m-6" id="rowPassword-error" th:errors="*{rowPassword}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="confirmPassword">Confirm Password</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{confirmPassword}" th:errorclass="is-valid" id="confirmPassword" type="password"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('confirmPassword')}" >-->
-<!--            <label class="col-lg. m-1" for="confirmPassword-error"></label>-->
-<!--            <small class="col-lg. m-6" id="confirmPassword-error" th:errors="*{confirmPassword}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="firstName">First Name</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{firstName}" th:errorclass="is-valid" id="firstName" type="text"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('firstName')}" >-->
-<!--            <label class="col-lg. m-1" for="firstName-error"></label>-->
-<!--            <small class="col-lg. m-6" id="firstName-error" th:errors="*{firstName}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="lastName">Last Name</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{lastName}" th:errorclass="is-valid" id="lastName" type="text"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('lastName')}" >-->
-<!--            <label class="col-lg. m-1" for="lastName-error"></label>-->
-<!--            <small class="col-lg. m-6" id="lastName-error" th:errors="*{lastName}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label class="col-lg. m-3" for="email">Email</label>-->
-<!--            <input class="col-lg. m-6" th:field="*{email}" th:errorclass="is-valid" id="email" type="email"/>-->
-<!--        </th:block>-->
-<!--        <th:block class="row" th:if="${#fields.hasErrors('email')}" >-->
-<!--            <label class="col-lg. m-1" for="email-error"></label>-->
-<!--            <small class="col-lg. m-6" id="email-error" th:errors="*{email}" ></small></th:block>-->
-
-<!--        <th:block class="row">-->
-<!--            <label  class="col-lg. m-3" for="field">Professional field</label>-->
-<!--            <select  th:field="*{professionalField}"  th:errorclass="bg-danger" id="field" name="professionalField" class="custom-select"  style="height: 50px"-->
-<!--            >-->
-<!--                <option value="" >Professional field</option>-->
-<!--                <option th:each="c : ${T(com.OpenMind.models.enums.FieldName).values()}" th:value="${c}" th:text="${c}" class=" col-lg. m-6"></option>-->
-<!--            </select>-->
-<!--            <th:block class="row" th:if="${#fields.hasErrors('professionalField')}" >-->
-<!--                <label class="col-lg. m-1" for="professionalField-error"></label>-->
-<!--                <small th:error="*{professionalField}" id="professionalField-error" class="bg-danger text-light rounded col-lg. m-6" >Must select professional field!</small>-->
-<!--            </th:block>-->
-<!--        </th:block>-->
-<!--&lt;!&ndash;        <button class="btn btn-success btn-lg" id="article-btn" type="submit">Submit</button>&ndash;&gt;-->
-<!--    </form>-->
 </header>
 <footer class="footer">
     <div th:replace="/fragments/special-fragments :: footer">Footer</div>

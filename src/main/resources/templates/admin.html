@@ -40,9 +40,9 @@
             th:object="${authoritiesModel}"
             class="modal__form container">
 
-        <th:block th:if="*{doseNotExist}" class="row">
-            <label class="col-lg. m-3" for="doseNotExist"></label>
-            <span class="col-lg. m-6" id="doseNotExist">User dose not exists</span>
+        <th:block th:if="*{doseNotExist}" class="error row">
+            <label class="col-lg. m-3" for="login-error"></label>
+            <span class="col-lg. m-6" id="login-error">User dose not exists</span>
         </th:block>
 
         <th:block class="row">

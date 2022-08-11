@@ -17,7 +17,7 @@ public class AuthoritiesModel {
     }
 
     @NotNull(message = "Username can not be empty!")
-    @Size(min = 2, max = 200)
+    @Size(min = 2, max = 20)
     public String getUsername() {
         return username;
     }

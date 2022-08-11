@@ -10,7 +10,7 @@
     <div th:replace="/fragments/special-fragments :: navbar">Navbar</div>
 
     <h2 class="modal__header">
-        Add new
+        Add
         <span class="highlight">new</span>
         meeting
     </h2>
@@ -21,6 +21,9 @@
             class="modal__form container">
 
         <!--todo fix the error css-->
+
+<!--        <th:block  th:if="*{isEndValid}" class="error row">-->
+<!--            <p class="row" id="isEndValid-error">Please, check if the and date is after stare date!</p></th:block>-->
 
         <th:block class="row">
             <label class="col-lg. m-1" for="topic">Topic</label>
