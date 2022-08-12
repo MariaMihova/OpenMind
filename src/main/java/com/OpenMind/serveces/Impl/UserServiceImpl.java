@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
             if(u.getPicture() == null){
                PictureViewModel picture = new PictureViewModel();
                 picture.setTitle("No profile picture");
-                picture.setUrl("images/defalt-user");
+                picture.setUrl("images/defalt-user.png");
                 u.setPicture(picture);
             }
         });

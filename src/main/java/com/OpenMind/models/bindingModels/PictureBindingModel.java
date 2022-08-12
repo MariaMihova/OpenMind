@@ -13,7 +13,7 @@ public class PictureBindingModel {
 
     public PictureBindingModel(){}
 
-    @NotBlank(message = "Please, enter picture name!")
+    @NotNull(message = "Please, enter picture name!")
     public String getTitle() {
         return title;
     }
@@ -22,6 +22,7 @@ public class PictureBindingModel {
         this.title = title;
     }
 
+    @NotNull(message = "Please, select file from your devise!")
     public MultipartFile getPicture() {
         return picture;
     }

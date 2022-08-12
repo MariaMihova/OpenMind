@@ -56,7 +56,7 @@ public class AdminControllerIT {
 
     @Test
     @WithMockUser("testUser")
-    void adminPageUse() throws Exception {
+    void adminPageUser() throws Exception {
         UserEntity user = testUtils.testUserUser("testUser");
         mockMvc.perform(get("/admin")
                         .with(csrf()))
@@ -79,7 +79,7 @@ public class AdminControllerIT {
                         .param("role", String.valueOf(Role.ADMIN))
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin"));
+                .andExpect(redirectedUrl("admin#meetings"));
     }
 
     @Test

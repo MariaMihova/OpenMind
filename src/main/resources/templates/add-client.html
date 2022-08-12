@@ -10,20 +10,17 @@
 <header class="header container">
     <div th:replace="/fragments/navbar :: navbar">Navbar</div>
 
-    <!-- <div class="modal hidden"> -->
-    <!--      <button class="btn&#45;&#45;close-modal">&times;</button>-->
+
     <h2 class="modal__header">
         Add new <span class="highlight">client</span>
     </h2>
-    <!--    <th:block  th:if="${registrationError}" class="error">-->
-    <!--        <p id="registration-error">Wrong user or password</p></th:block>-->
+
     <form
             th:action="@{/add-client}"
             th:method="POST"
             th:object="${clientBindingModel}"
             class="modal__form container">
 
-        <!--todo fix the error css-->
 
         <th:block class="row">
             <label class="col-lg. m-3" for="initials">Initials</label>

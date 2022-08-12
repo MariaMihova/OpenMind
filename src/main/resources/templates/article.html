@@ -9,7 +9,7 @@
     <div th:replace="/fragments/special-fragments :: navbar">Navbar</div>
     <div class="row">
         <div class="col-xs. m-6 header__title ">
-            <!-- <h1 onclick="alert('HTML alert')"> -->
+
             <h1 class="title" th:value="${article.getTitle()}" th:text="${article.getTitle()}">Article name
             </h1>
             </h1>
@@ -18,7 +18,6 @@
                 >Article by <span class="highlight" th:text="${article.getUsername()}">user</span></div>
 
             </h4>
-            <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
             <img src="/images/socio3.png" class="header__img col-xs. m-6" alt="article-img" />
         </div>
     </div>

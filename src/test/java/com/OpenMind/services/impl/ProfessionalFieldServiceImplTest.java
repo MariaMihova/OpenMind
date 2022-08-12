@@ -48,7 +48,6 @@ public class ProfessionalFieldServiceImplTest {
         Assertions.assertFalse(toTest.doseFieldsExists());
     }
 
-    //todo test initialiseFields
 
     @Test
     void findByFieldName_fond(){

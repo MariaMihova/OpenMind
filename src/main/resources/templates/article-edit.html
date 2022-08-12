@@ -14,19 +14,17 @@
         Edit article
     </h2>
 
+    <th:block class="row" th:if="${notUpdated}" >
+        <label class="col-lg. m-1" for="some-error"></label>
+        <small class="col-lg. m-6" id="some-error"  >Something went wrong! Article not updated!</small></th:block>
     <form
             th:action="@{/article/{id}/edit(id=${article.getId()})}"
             th:method="PATCH"
             th:object="${article}"
             class="modal__form container">
 
-        <!--todo fix the error css-->
 
-
-<!--        <th:block class="row" th:if="${notUpdated}" >-->
-<!--            <label class="col-lg. m-1" for="notUpdated"></label>-->
-<!--            <small class="col-lg. m-6" id="notUpdated"  >Something went wrong! Article did not updated!</small></th:block>-->
-<!--        <th:block class="row">-->
+        <th:block class="row">
         <label class="col-xs. m-4" for="title">Title</label>
         <input class="col-xs. m-10" th:field="*{title}" th:errorclass="is-valid" id="title" type="text"/>
         </th:block>
@@ -36,7 +34,7 @@
 
         <th:block class="row">
         <label class="col-xs. m-4" for="content">Content</label>
-        <textarea class="col-xs. m-10" cols="77" rows="8" th:field="*{content}" th:errorclass="is-valid" id="content" type="text" />
+            <textarea class="col-xs. m-10" cols="77" rows="8" th:field="*{content}" th:errorclass="is-valid" id="content" type="text"></textarea>
         </th:block>
         <th:block class="row" th:if="${#fields.hasErrors('content')}" >
             <label class="col-lg. m-1" for="content-error"></label>

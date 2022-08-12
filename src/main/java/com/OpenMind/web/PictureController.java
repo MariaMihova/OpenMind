@@ -69,7 +69,19 @@ public class PictureController {
 
 
     @PostMapping("/edit-picture")
-    public String editPictureMethod(PictureBindingModel pictureBindingModel, Principal principal) throws IOException {
+    public String editPictureMethod(PictureBindingModel pictureBindingModel,
+                                    BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                    Principal principal) throws IOException {
+        if(bindingResult.hasErrors()){
+            redirectIfError(pictureBindingModel, bindingResult, redirectAttributes);
+            return "redirect:edit-picture";
+        }
+
+        if(!pictureService.createPicture(pictureBindingModel, principal)){
+            pictureBindingModel.setNotValid(true);
+            redirectIfError(pictureBindingModel, bindingResult, redirectAttributes);
+            return "redirect:edit-picture";
+        }
 
         pictureService.editPicture(pictureBindingModel, principal);
 

@@ -9,10 +9,9 @@
   <div th:replace="/fragments/navbar :: navbar">Navbar</div>
   <div class="row">
     <div class="col-xs. m-6 header__title ">
-      <!-- <h1 onclick="alert('HTML alert')"> -->
+
       <h1 class="title">
         Follow
-        <!-- Green highlight effect -->
         <span class="highlight">your soul,</span>
         <br />
         <span class="highlight">it knows</span>
@@ -22,7 +21,6 @@
         <div id="user-welcome" sec:authorize="isAuthenticated()"
         >A simple self-care experience for a better life.</div>
       </h4>
-      <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
       <img src="images/psyco.png" class="header__img col-xs. m-6" alt="psych-img" />
     </div>
 
@@ -54,9 +52,9 @@
       />
 
       <div class="features__feature col-lg. m-8 ">
-        <h5  th:text="${s.getFullName()}" class="features__header highlight">Две Имена на рандъм Специалист</h5>
+        <h5  th:text="${s.getFullName()}" class="features__header highlight"></h5>
         <p>
-          <b th:text="${s.getFullName()}"> Образование и професионален опит</b> is
+          <b th:text="${s.getFullName()}"> </b> is
           Open mind member since <span th:text="${s.getRegisteredAt()}"></span> at the professional field
           of <span th:text="${s.getProfessionalField()}"></span> .
         </p>

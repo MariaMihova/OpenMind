@@ -23,7 +23,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAllByProfessionalFieldId(Long id);
 
-//    @Query("select new com.OpenMind.models.viewModels.UserViewModel(u.id,  u.firstName, u.lastName,u.username) from UserEntity u join u.authorities a where a.role like :role")
 
     List<UserEntity> findAllByAuthoritiesRole(Role role);
 

@@ -1,6 +1,7 @@
 package com.OpenMind.models.bindingModels;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,6 +35,7 @@ public class ContactsBindingModel {
     }
 
 
+    @NotBlank(message = "Please, enter phone number!")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -42,6 +44,7 @@ public class ContactsBindingModel {
         this.phoneNumber = phoneNumber;
     }
 
+    @NotBlank(message = "Please, enter email address!")
     @Email
     public String getEmail() {
         return email;

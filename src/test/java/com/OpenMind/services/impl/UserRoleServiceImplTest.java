@@ -46,7 +46,6 @@ public class UserRoleServiceImplTest {
         Assertions.assertFalse(toTest.doseRoleExists());
     }
 
-    //todo test initialiseRoles
 
     @Test
     void getRole_test(){

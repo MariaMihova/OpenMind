@@ -13,6 +13,7 @@ public class CleanStatScheduler {
         this.statService = statService;
     }
 
+//    @Scheduled( cron= "59 59 23 * * *")
     @Scheduled( cron= "59 59 23 * * *")
     public void cleanStats(){
       statService.clean();

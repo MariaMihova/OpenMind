@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+;
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 public class UserProfileController {

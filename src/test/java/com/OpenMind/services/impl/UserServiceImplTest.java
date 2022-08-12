@@ -82,7 +82,6 @@ public class UserServiceImplTest {
         Assertions.assertFalse(toTest.existsByUsername("nonExistingUsername"));
     }
 
-    //todo test register new user
 
 
     @Test

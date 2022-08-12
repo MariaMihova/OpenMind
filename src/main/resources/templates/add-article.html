@@ -20,7 +20,6 @@
             th:object="${articleBindingModel}"
             class="modal__form container">
 
-<!--todo fix the error css-->
 
         <th:block class="row">
         <label class="col-lg. m-1" for="title">Title</label>
@@ -30,9 +29,9 @@
             <label class="col-lg. m-1" for="title-error"></label>
             <small class="col-lg. m-6" id="title-error" th:errors="*{title}" ></small></th:block>
 
-        <th:block class="row"></th:block>
+        <th:block class="row">
         <label class="col-lg. m-1" for="content">Content</label>
-        <textarea class="col-lg. m-6"  cols="77" rows="10" th:field="*{content}" th:errorclass="is-valid" id="content" type="text" />
+        <textarea class="col-lg. m-6"  cols="77" rows="10" th:field="*{content}" th:errorclass="is-valid" id="content" type="text" ></textarea>
         </th:block>
         <th:block class="row" th:if="${#fields.hasErrors('content')}" >
             <label class="col-lg. m-1" for="content-error"></label>

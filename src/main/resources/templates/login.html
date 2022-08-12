@@ -13,7 +13,7 @@
   <h2 class="modal__header row">Login</h2>
 
   <th:block  th:if="${loginError}" class="error row">
-    <p class="row" id="login-error">Wrong user or password</p></th:block>
+    <p class="row" id="some-error">Wrong user or password</p></th:block>
 
 
   <form th:action="@{/login}" th:method="POST" class="modal__form container">

@@ -44,7 +44,8 @@ public class ArticleServiceImpl implements ArticleService {
     public boolean addArticle(ArticleBindingModel articleBindingModel, String username) {
 
         Article article = modelMapper.map(articleBindingModel, Article.class);
-        article.setProfessionalField(professionalFieldService.findByFieldName(FieldName.valueOf(articleBindingModel.getProfessionalField())));
+        article.setProfessionalField(professionalFieldService.findByFieldName(
+                FieldName.valueOf(articleBindingModel.getProfessionalField())));
         article.setCreated(LocalDate.now());
         UserEntity userEntity = userService.findByUsername(username);
         article.setUser(userEntity);

@@ -61,7 +61,7 @@ public class RegisterController {
             return "redirect:registration";
         }
 
-//        return "redirect:/home";
+
         return "redirect:/add-contacts";
     }
 

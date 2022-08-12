@@ -9,9 +9,7 @@
   <div th:replace="/fragments/navbar :: navbar">Navbar</div>
   <div class="row">
     <div class="col-xs. m-6 header__title ">
-      <!-- <h1 onclick="alert('HTML alert')"> -->
       <h1 class="title">
-        <!-- Green highlight effect -->
         <span class="highlight">Speech</span>
         is power: <br />
         to persude,
@@ -22,7 +20,6 @@
         <div id="user-welcome" sec:authorize="isAuthenticated()"
         >Progress over perfection!</div>
       </h4>
-      <!-- <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button> -->
       <img src="images/speech2.png" class="header__img col-xs. m-6" alt="speech-img" />
     </div>
 
@@ -54,9 +51,9 @@
       />
 
       <div class="features__feature col-lg. m-8 ">
-        <h5  th:text="${s.getFullName()}" class="features__header highlight">Две Имена на рандъм Специалист</h5>
+        <h5  th:text="${s.getFullName()}" class="features__header highlight"></h5>
         <p>
-          <b th:text="${s.getFullName()}"> Образование и професионален опит</b> is
+          <b th:text="${s.getFullName()}"></b> is
           Open mind member since <span th:text="${s.getRegisteredAt()}"></span> at the professional field
           of <span th:text="${s.getProfessionalField()}"></span> .
         </p>

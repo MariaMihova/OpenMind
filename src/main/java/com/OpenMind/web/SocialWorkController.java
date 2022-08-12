@@ -1,5 +1,6 @@
 package com.OpenMind.web;
 
+import com.OpenMind.models.enums.FieldName;
 import com.OpenMind.models.viewModels.ArticleVewModel;
 import com.OpenMind.models.viewModels.UserViewModel;
 import com.OpenMind.serveces.ArticleService;
@@ -15,7 +16,7 @@ public class SocialWorkController {
 
     private final UserService userService;
     private final ArticleService articleService;
-    private final Long PROFESSIONAL_FIELD = 2L;
+    private final Long PROFESSIONAL_FIELD = (long) FieldName.SOCIAL_WORK.ordinal();
 
     public SocialWorkController(UserService userService, ArticleService articleService) {
         this.userService = userService;

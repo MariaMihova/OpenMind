@@ -64,7 +64,6 @@ public class MeetingBindingModel {
     }
 
     @AssertTrue(message = "Field `end` should be later than `start`")
-    // Other rules can also be validated in other methods
     private boolean isEndAfterStart() {
         if(this.start == null || this.end == null) return false;
         return start.isBefore(end);

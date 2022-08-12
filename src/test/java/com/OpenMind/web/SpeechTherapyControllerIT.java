@@ -38,7 +38,6 @@ public class SpeechTherapyControllerIT {
 
     private UserEntity testUser;
 
-    //todo articles
 
 
     @BeforeEach

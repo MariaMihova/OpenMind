@@ -8,15 +8,11 @@
 <header class="header">
     <div th:replace="/fragments/navbar :: navbar">Navbar</div>
 
-    <!-- <div class="modal hidden"> -->
     <button class="btn--close-modal">&times;</button>
     <h2 class="modal__header">Logout</h2>
     <form th:action="@{/logout}" th:method="post" class="modal__form">
         <input type="submit" value="Logout">
     </form>
-    <!--      <span th:if="@{currentUser}" th:text="Bravooo! You are logged in!"></span>-->
-    <!-- </div> -->
-    <!-- <div class="overlay hidden"></div> -->
 </header>
 <footer class="footer">
     <div th:replace="/fragments/navbar :: footer">Footer</div>

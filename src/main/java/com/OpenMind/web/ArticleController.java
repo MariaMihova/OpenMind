@@ -98,12 +98,12 @@ public class ArticleController {
     @PatchMapping("/article/{id}/edit")
     public String editArticleMethod(@PathVariable("id") int id, @Valid ArticleBindingModel article,
                                     BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        //todo не показва грешките при редирект
         if(bindingResult.hasErrors()){
-            redirectAttributes.addAttribute("notUpdated", true);
+            redirectAttributes.addFlashAttribute("notUpdated", true);
            redirectIfError(article, bindingResult, redirectAttributes);
             return "redirect:edit";
         }
+
 
         ArticleUpdateServiceModel serviceModel = modelMapper.map(article, ArticleUpdateServiceModel.class);
         serviceModel.setId((long)id);
@@ -115,16 +115,5 @@ public class ArticleController {
         redirectAttributes.addFlashAttribute("articleBindingModel", articleBindingModel)
                 .addFlashAttribute("org.springframework.validation.BindingResult.articleBindingModel", bindingResult);
     }
-
-
-
-
-//    @ExceptionHandler({ResourceNotFoundException.class})
-//    public ModelAndView exceptionHandler(ResourceNotFoundException e){
-//        ModelAndView modelAndView = new ModelAndView("404");
-//        modelAndView.addObject("message", e.getMessage());
-//        modelAndView.setStatus(HttpStatus.NOT_FOUND);
-//        return modelAndView;
-//    }
 
 }
